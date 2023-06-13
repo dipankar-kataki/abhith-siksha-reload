@@ -352,13 +352,20 @@
                                         class="fa fa-book"></i>@endif &nbsp; {{$topic->name}}</p>
                                 <div class="d-flex course-duration-div">
 
-                                    @if($topic->type==2 && $topic->preview==1 ) <p data-toggle="modal"
-                                        data-target="#exampleModalLong" data-lesson="{{$topic->id}}" id="previewVideo">
-                                        preview
-                                    </p>
-                                    <p> {{gmdate("H:i:s", $topic->lessonAttachment->video_duration)}}
-                                    </p> @endif
-                                    @if($topic->type==2) @if($topic->preview==1)<i class="fa fa-play mt-2"></i>@endif
+                                    @if($topic->type==2 && $topic->preview==1 ) 
+                                        <p data-toggle="modal"
+                                            data-target="#exampleModalLong" data-lesson="{{$topic->id}}" id="previewVideo">
+                                            preview
+                                        </p>
+                                        @php
+                                            $duration = $topic->lessonAttachment->video_duration;
+                                            $carbonDuration = Carbon\Carbon::createFromFormat('H:i:s', $duration);
+                                            $formattedDuration = $carbonDuration->format('H:i:s');
+                                        @endphp
+                                        <p>{{$formattedDuration}}</p>
+                                    @endif
+                                    @if($topic->type==2) 
+                                        @if($topic->preview==1)<i class="fa fa-play mt-2"></i>@endif
                                     @endif
                                 </div>
                             </div>
