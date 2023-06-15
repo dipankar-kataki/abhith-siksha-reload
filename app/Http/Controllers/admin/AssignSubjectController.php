@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Traits\LessonAttachmentTrait;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Crypt;
-use Str;
+use Illuminate\Support\Str;
 
 class AssignSubjectController extends Controller
 {
