@@ -54,6 +54,17 @@
             <form enctype="multipart/form-data" id="addSubject" method="POST" action="javascript:void(0)">
                 @csrf
                 @include('admin.course-management.subjects.form')
+                <p style="color: #fc0000;font-weight: 600;display:none;" id="file-upload-warning-text">Note: Please donot refresh the page or click any link during file upload. </p>
+                <div class="progress upload-bar-display" style="height:30px;margin-bottom:20px;display:none;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated upload-bar-percent" style="width:40%">
+                        <h5 style="padding:5px;" id="upload-bar-text">40 % Uploaded</h5>
+                    </div>
+                </div>
+                <div class="progress complete-upload-bar-display" style="height:30px;margin-bottom:20px;display:none;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%; background-color: #33b20c;">
+                        <h5 style="padding:5px;" id="complete-upload-bar-text">Upload Complete</h5>
+                    </div>
+                </div>
                 <div style="float: right;">
                     <button type="reset" class="btn btn-gradient-light btn-fw" id="assignSubjectCancelBtn">Cancel</button>
                     <button type="submit" class="btn btn-md btn-success" id="assignSubjectSubmitBtn">Update</button>
@@ -166,6 +177,25 @@
                     var data = new FormData(document.getElementById("addSubject"));
 
                     $.ajax({
+                        xhr: function() {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = Math.floor ( (evt.loaded / evt.total) * 100 );
+                                    $('#file-upload-warning-text').css('display', 'block');
+                                    $('.upload-bar-display').css('display', 'block');
+                                    $('.upload-bar-percent').width(percentComplete + '%');
+                                    $('#upload-bar-text').text(percentComplete + ' %' + ' Completed');
+                                }
+                            }, false);
+
+                            xhr.addEventListener("loadend", function (evt) {
+                                $('#file-upload-warning-text').css('display', 'none');
+                                $('.upload-bar-display').css('display', 'none');
+                                $('.complete-upload-bar-display').css('display', 'block');
+                            }, false);
+                            return xhr;
+                        },
                         url: "{{ route('admin.course.management.subject.store') }}",
                         type: "POST",
                         data: data,
