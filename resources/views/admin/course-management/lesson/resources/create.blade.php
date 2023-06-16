@@ -36,7 +36,19 @@
                             @csrf
                             <input type="hidden" name="parent_id" value="{{$lesson->id}}">
                             <input type="hidden" name="type" value="create-topic">
+
                             @include('admin.course-management.lesson.common.form')
+
+                            <p style="color: #fc0000;font-weight: 600;display:none;" id="file-upload-warning-text">
+                                Note: Please donot refresh the page or click any link during file upload. 
+                            </p>
+
+                            <div class="progress upload-bar-display" style="height:30px;margin-bottom:20px;display:none;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated upload-bar-percent" style="width:40%">
+                                    <h5 style="padding:5px;" id="upload-bar-text">40 % Uploaded</h5>
+                                </div>
+                            </div>
+
                             <div style="float: right;">
                                 <button type="button" class="btn btn-gradient-light btn-fw"
                                     id="assignTopicCancelBtn" onclick="window.history.go(-1);">Cancel</button>
@@ -224,13 +236,26 @@ function setFileInfo() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#assignTopicSubmitBtn').html('Sending..');
+            $('#assignTopicSubmitBtn').html('Uploading Please Wait..');
             for ( instance in CKEDITOR.instances ){
                      CKEDITOR.instances[instance].updateElement();
                 }
                 var data = new FormData(document.getElementById("assignTopicForm"));
                 
             $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = Math.floor ( (evt.loaded / evt.total) * 100 );
+                            $('#file-upload-warning-text').css('display', 'block');
+                            $('.upload-bar-display').css('display', 'block');
+                            $('.upload-bar-percent').width(percentComplete + '%');
+                            $('#upload-bar-text').text(percentComplete + ' %' + ' Completed');
+                        }
+                    }, false);
+                    return xhr;
+                },
                 url: "{{route('admin.course.management.lesson.topic.store')}}" ,
                 type: "POST",
                 data: data,
@@ -247,23 +272,31 @@ function setFileInfo() {
                         location.reload();
                     }
                     if(response.status==0){
-                        $.each(response.message,function(prefix,val){
-                            toastr.error(val[0]);
-                        })
-                       
-                        $('#assignTopicSubmitBtn').html('Submit');
+                        // $.each(response.message,function(prefix,val){
+                        //     toastr.error(val[0]);
+                        // })
+                        toastr.error(response.message);
+                        $('#file-upload-warning-text').css('display', 'none');
+                        $('.upload-bar-display').css('display', 'none');
+                        $('#assignTopicSubmitBtn').text('Submit');
                     }
                     if(response.status==2){
                         toastr.error(response.message);
                        
-                        $('#assignTopicSubmitBtn').html('Submit');
+                        $('#assignTopicSubmitBtn').text('Submit');
                     }
                     if(response.status==3){
                         toastr.error(response.message);
                        
-                        $('#assignTopicSubmitBtn').html('Submit');
+                        $('#assignTopicSubmitBtn').text('Submit');
                     }
                            
+                },
+                error:function(xhr, status, error){
+                    console.log('Ajax Error===>',xhr.responseText.message)
+                    $('#file-upload-warning-text').css('display', 'none');
+                    $('.upload-bar-display').css('display', 'none');
+                    $('#assignTopicSubmitBtn').text('Submit');
                 }
             });
         }

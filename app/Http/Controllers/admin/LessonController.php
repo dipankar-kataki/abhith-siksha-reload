@@ -18,7 +18,7 @@ use App\Models\UserDetails;
 use App\Traits\LessonAttachmentTrait;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
-use Str;
+use Illuminate\Support\Str;
 
 class LessonController extends Controller
 {

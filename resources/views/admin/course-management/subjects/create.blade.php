@@ -192,7 +192,7 @@
                                     $('#file-upload-warning-text').css('display', 'block');
                                     $('.upload-bar-display').css('display', 'block');
                                     $('.upload-bar-percent').width(percentComplete + '%');
-                                    $('#upload-bar-text').text(percentComplete + ' %' + 'Completed');
+                                    $('#upload-bar-text').text(percentComplete + ' %' + ' Completed');
                                 }
                             }, false);
                             return xhr;
