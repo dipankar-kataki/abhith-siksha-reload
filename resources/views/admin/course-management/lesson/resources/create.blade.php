@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            <div class="progress complete-upload-bar-display" style="height:30px;margin-bottom:20px;display:none;">
+                            <div class="progress complete-upload-bar-display d-none" style="height:30px;margin-bottom:20px;">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%; background-color: #33b20c;">
                                     <h5 style="padding:5px;" id="complete-upload-bar-text">Upload Complete</h5>
                                 </div>
@@ -260,10 +260,11 @@ function setFileInfo() {
                             $('#upload-bar-text').text(percentComplete + ' %' + ' Completed...');
                         }
                     }, false);
-                    xhr.addEventListener("loadend", function (evt) {
+                    xhr.addEventListener("load", function (evt) {
                         $('#file-upload-warning-text').css('display', 'none');
                         $('.upload-bar-display').css('display', 'none');
-                        $('.complete-upload-bar-display').css('display', 'block');
+                        $('.complete-upload-bar-display').removeClass('d-none');
+                        $('.complete-upload-bar-display').addClass('d-block');
                     }, false);
                     return xhr;
                 },
@@ -289,21 +290,27 @@ function setFileInfo() {
                         toastr.error(response.message);
                         $('#file-upload-warning-text').css('display', 'none');
                         $('.upload-bar-display').css('display', 'none');
-                        $('.complete-upload-bar-display').css('display', 'none');
+                        $('.complete-upload-bar-display').removeClass('d-block');
+                        $('.complete-upload-bar-display').addClass('d-none');
+
                         $('#assignTopicSubmitBtn').text('Submit');
                     }
                     if(response.status==2){
                         toastr.error(response.message);
                         $('#file-upload-warning-text').css('display', 'none');
                         $('.upload-bar-display').css('display', 'none');
-                        $('.complete-upload-bar-display').css('display', 'none');
+                        $('.complete-upload-bar-display').removeClass('d-block');
+                        $('.complete-upload-bar-display').addClass('d-none');
+
                         $('#assignTopicSubmitBtn').text('Submit');
                     }
                     if(response.status==3){
                         toastr.error(response.message);
                         $('#file-upload-warning-text').css('display', 'none');
                         $('.upload-bar-display').css('display', 'none');
-                        $('.complete-upload-bar-display').css('display', 'none');
+                        $('.complete-upload-bar-display').removeClass('d-block');
+                        $('.complete-upload-bar-display').addClass('d-none');
+
                         $('#assignTopicSubmitBtn').text('Submit');
                     }
                            
@@ -312,7 +319,9 @@ function setFileInfo() {
                     toastr.error('Oops! Something Went Wrong');
                     $('#file-upload-warning-text').css('display', 'none');
                     $('.upload-bar-display').css('display', 'none');
-                    $('.complete-upload-bar-display').css('display', 'none');
+                    $('.complete-upload-bar-display').removeClass('d-block');
+                    $('.complete-upload-bar-display').addClass('d-none');
+
                     $('#assignTopicSubmitBtn').text('Submit');
                 }
             });
