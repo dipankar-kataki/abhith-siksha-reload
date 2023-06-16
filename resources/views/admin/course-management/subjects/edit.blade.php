@@ -212,10 +212,13 @@
                                 location.reload();
                             }
                             if (response.status == 0) {
-                                $.each(response.message, function(prefix, val) {
-                                    toastr.error(val[0]);
-                                })
-
+                                // $.each(response.message, function(prefix, val) {
+                                //     toastr.error(val[0]);
+                                // })
+                                toastr.error(response.message);
+                                $('#file-upload-warning-text').css('display', 'none');
+                                $('.upload-bar-display').css('display', 'none');
+                                $('.complete-upload-bar-display').css('display', 'none');
                                 $('#assignSubjectSubmitBtn').html('Submit');
                             }
 

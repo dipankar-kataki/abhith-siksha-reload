@@ -200,7 +200,7 @@
                                     $('#upload-bar-text').text(percentComplete + ' %' + ' Completed');
                                 }
                             }, false);
-                            
+
                             xhr.addEventListener("loadend", function (evt) {
                                 $('#file-upload-warning-text').css('display', 'none');
                                 $('.upload-bar-display').css('display', 'none');
@@ -231,9 +231,9 @@
 
                                 toastr.error(response.message);
 
-                                $('#file-upload-warning-text').css('display', 'block');
-                                $('.upload-bar-display').css('display', 'block');
-
+                                $('#file-upload-warning-text').css('display', 'none');
+                                $('.upload-bar-display').css('display', 'none');
+                                $('.complete-upload-bar-display').css('display', 'none');
                                 $('#assignSubjectSubmitBtn').text('Submit');
                             }
 
@@ -242,6 +242,7 @@
 
                                 $('#file-upload-warning-text').css('display', 'none');
                                 $('.upload-bar-display').css('display', 'none');
+                                $('.complete-upload-bar-display').css('display', 'none');
                                 $('#assignSubjectSubmitBtn').text('Submit');
                             }
 
