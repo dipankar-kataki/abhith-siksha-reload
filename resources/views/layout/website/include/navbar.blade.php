@@ -1,7 +1,7 @@
 <header id="header" class="fixed-top">
     <div class="container-fluid d-flex align-items-center p0">
         <h1 class="logo mr-auto">
-            <a href="{{route('website.dashboard')}}"><img src="{{asset('asset_website/img/home/logo_.png')}}"></a>
+            <a href="{{route('website.dashboard')}}"><img src="{{asset('asset_website/img/home/abhith-reloaded.png')}}"></a>
         </h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
