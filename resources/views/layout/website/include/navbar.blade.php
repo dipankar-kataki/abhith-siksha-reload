@@ -5,7 +5,6 @@
         </h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li>AAAlll</li>
                 <li class="{{ Route::is('website.dashboard') ? 'active' : '' }}"><a href="{{route('website.dashboard')}}">Home</a></li>
                 <li class="{{ Route::is('website.about') ? 'active' : '' }}"><a href="{{route('website.about')}}">About Us</a></li>
                 <li class="{{ Route::is('website.course') || Route::is('website.course.details') ? 'active' : '' }}"><a href="{{route('website.course')}}">Courses</a></li>
