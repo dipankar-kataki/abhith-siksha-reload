@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AddonsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\CourseController;
@@ -230,13 +231,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('change-visibility-time-table', [TimeTableController::class, 'changeVisibility'])->name('admin.change.visibility.time.table');
     });
 
-        /* ------------------------------- Testimonial ------------------------------------ */
-        Route::prefix('testimonial')->group(function () {
-            Route::get('', [TestimonialController::class, 'index'])->name('admin.testimonial.index');
-            Route::get('add', [TestimonialController::class, 'add'])->name('admin.testimonial.add');
-            Route::post('submit', [TestimonialController::class, 'submit'])->name('admin.testimonial.submit');
-            Route::post('delete', [TestimonialController::class, 'delete'])->name('admin.testimonial.delete');
-        });
+    /* ------------------------------- Testimonial ------------------------------------ */
+    Route::prefix('testimonial')->group(function () {
+        Route::get('', [TestimonialController::class, 'index'])->name('admin.testimonial.index');
+        Route::get('add', [TestimonialController::class, 'add'])->name('admin.testimonial.add');
+        Route::post('submit', [TestimonialController::class, 'submit'])->name('admin.testimonial.submit');
+        Route::post('delete', [TestimonialController::class, 'delete'])->name('admin.testimonial.delete');
+    });
+
+    /* ------------------------------- Addons ------------------------------------ */
+
+    Route::prefix('addons')->group(function() {
+        Route::get('get-create-addon-page', [AddonsController::class, 'getCreateAddonPage'])->name('admin.get.create.addon.page');
+        Route::post('create-addon', [AddonsController::class, 'createAddon'])->name('admin.create.addon');
+    });
+
+
 });
 Route::get('course-management/subject/demovideo/{subject_id}', [SubjectController::class, 'getDemoVideo'])->name('admin.subject.promovideo');
 

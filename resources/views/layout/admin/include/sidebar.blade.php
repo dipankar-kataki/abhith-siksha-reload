@@ -183,7 +183,15 @@
             <li class="nav-item {{ request()->routeIs('admin.testimonial.index') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.testimonial.index') }}"><span
                         class="menu-title">Testimonial</span>
-                    <i class="mdi  mdi-calendar-clock menu-icon"></i></a>
+                    <i class="mdi  mdi-account-star menu-icon"></i></a>
+            </li>
+
+             {{-- For Addons --}}
+             <li class="nav-item {{ request()->routeIs('admin.get.create.addon.page') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.create.addon.page') }}">
+                    <span class="menu-title">Addons</span>
+                    <i class="mdi  mdi-tag-multiple menu-icon"></i>
+                </a>
             </li>
         @endif
     </ul>
