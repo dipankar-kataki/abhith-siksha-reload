@@ -45,36 +45,25 @@
                         </div>
                         <div class="mb-3">
                             <label>Select Addon Type</label>
-                            <select name="type" id="addonType" class="form-control">
-                                <option selected disabled>- Select -</option>
+                            <select name="type" id="addonType" class="form-control" required>
+                                <option value=''>- Select -</option>
                                 <option value="pdf">PDF</option>
-                                <option value="mcq">Multiple Choice Question</option>
+                                {{-- <option value="mcq">Multiple Choice Question</option> --}}
                                 <option value="image">Image</option>
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label>Enter Price</label>
+                            <input type="text" name="price" class="form-control" placeholder='e.g 1000' required>
+                        </div>
+                        <div class="mb-3">
                             <label>Upload File</label>
-                            <input type="file" class="form-control" id="addonFile" name="addonFile">
+                            <input type="file" class="form-control" id="addonFile" name="addonFile" required>
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-md btn-success" type="submit" id="createAddonBtn">Create</button>
                         </div>
                     </form>
-                    
-                    {{-- @if ($item->image == '')
-                        <img src="{{ asset('default.png') }}" alt="" width="200" height="200"
-                            style="object-fit: cover">
-                    @else
-                        <img src="{{ asset($item->image) }}" alt="" width="200" height="200"
-                            style="object-fit: cover">
-                    @endif --}}
-
-                    {{-- <h5 class="mt-4">{{ $item->name }}</h5>
-                    <p> - {{ $item->qualification }}</p>
-                    <p>"{{ $item->message }}"
-                    </p>
-
-                    <button class="btn btn-danger deleteBtn" data-id="{{ Crypt::encrypt($item->id) }}">Delete</button> --}}
                 </div>
             </div>
         </div>
@@ -83,4 +72,9 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $('#createAddonForm').on('submit', function(){
+           
+        });
+    </script>
 @endsection

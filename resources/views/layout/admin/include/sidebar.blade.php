@@ -187,11 +187,23 @@
             </li>
 
              {{-- For Addons --}}
-             <li class="nav-item {{ request()->routeIs('admin.get.create.addon.page') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.get.create.addon.page') }}">
+
+            <li class="nav-item {{ request()->routeIs('admin.get.create.addon.page') ? 'active' : '' }}">
+                <a class="nav-link" data-toggle="collapse" href="#addonsSubMenu" aria-expanded="false" aria-controls="ui-basic">
                     <span class="menu-title">Addons</span>
+                    <i class="menu-arrow"></i>
                     <i class="mdi  mdi-tag-multiple menu-icon"></i>
                 </a>
+                <div class="collapse" id="addonsSubMenu">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="{{ route('admin.get.create.addon.page') }}">Create</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">List</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         @endif
     </ul>
