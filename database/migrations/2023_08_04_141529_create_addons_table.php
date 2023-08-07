@@ -15,7 +15,6 @@ class CreateAddonsTable extends Migration
     {
         Schema::create('addons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->string('name');
             $table->string('type');
@@ -23,7 +22,6 @@ class CreateAddonsTable extends Migration
             $table->boolean('status')->default(1);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('subject_id')->references('id')->on('subjects');
 
         });

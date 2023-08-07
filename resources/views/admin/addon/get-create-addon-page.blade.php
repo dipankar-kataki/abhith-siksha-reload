@@ -83,8 +83,8 @@
             let addonFile = $('#addonFile').val();
             let addonFileExtension = addonFile.split('.')[1];
 
-            console.log('addonType ===>', addonType);
-            console.log('addonFileExtension ===>', addonFileExtension);
+            // console.log('addonType ===>', addonType);
+            // console.log('addonFileExtension ===>', addonFileExtension);
 
             if(addonType == 'pdf' && (addonFileExtension != 'pdf') ){
                 Swal.fire({

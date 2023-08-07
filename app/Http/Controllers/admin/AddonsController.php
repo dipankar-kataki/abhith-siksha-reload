@@ -40,11 +40,15 @@ class AddonsController extends Controller
                     
                 }
 
-                // Addon::create([
-                //     'user_id' => Auth::user()->id,
-                //     ''
-                // ]);
-                return response()->json(['message' => 'Great! Addon Created Succesfully.', 'data' => $fileName, 'status' => 1]);
+                Addon::create([
+                    'subject_id' => $request->subject_id,
+                    'name' => $request->name,
+                    'type' => $request->type,
+                    'price' => $request->price,
+                    'file_path' => $fileName
+                ]);
+
+                return response()->json(['message' => 'Great! Addon Created Succesfully.', 'data' => null, 'status' => 1]);
             }catch(\Exception $e){
                 return response()->json(['message' => 'Oops! Something Went Wrong.', 'data' => null, 'status' => 0]);
             }
