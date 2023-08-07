@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Addon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AddonsController extends Controller
@@ -17,16 +19,34 @@ class AddonsController extends Controller
             'name' => 'required',
             'type' => 'required',
             'price' => 'required',
-            'addonFile' => 'required'
+            'addonFile' => 'required|mimes:jpeg,png,jpg,pdf|max:3048',
         ]);
 
         if($validator->fails()){
             return response()->json(['message' => 'Oops '.$validator->errors()->first(), 'data' => null, 'status' => 0]);
         }else{
             try{
-                return response()->json(['mesage' => 'Great! Addon Created Succesfully.', 'data' => $request->all(), 'status' => 1]);
+
+                if($request->hasFile('addonFile')){
+                    $file = time() . '.' . $request->addonFile->extension();
+                    $fileName = null;
+                    if($request->addonFile->extension() == 'pdf'){
+                        $request->addonFile->move(public_path('files/addons/pdf/'), $file);
+                        $fileName = 'files/addons/pdf/'. $file;
+                    }else{
+                        $request->addonFile->move(public_path('files/addons/image/'), $file);
+                        $fileName = 'files/addons/image/'. $file;
+                    }
+                    
+                }
+
+                // Addon::create([
+                //     'user_id' => Auth::user()->id,
+                //     ''
+                // ]);
+                return response()->json(['message' => 'Great! Addon Created Succesfully.', 'data' => $fileName, 'status' => 1]);
             }catch(\Exception $e){
-                return response()->json(['mesage' => 'Oops! Something Went Wrong.', 'data' => null, 'status' => 0]);
+                return response()->json(['message' => 'Oops! Something Went Wrong.', 'data' => null, 'status' => 0]);
             }
         }
     }
