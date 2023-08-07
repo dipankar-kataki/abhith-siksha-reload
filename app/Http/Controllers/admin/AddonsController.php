@@ -54,4 +54,20 @@ class AddonsController extends Controller
             }
         }
     }
+
+    public function addonList(){
+        $addonList = Addon::orderBy('created_at', 'desc')->get();
+        return view('admin.addon.list')->with(['addonList' => $addonList]);
+    }
+
+    public function changeStatus(Request $request){
+        try{
+            Addon::where('id', $request->id)->update([
+                'status' => $request->status
+            ]);
+            return response()->json(['message' => 'Great! Status Change Successfully.', 'data' => null, 'status' => 1]);
+        }catch(\Exception $e){
+            return response()->json(['message' => 'Oops! Something Went Wrong.', 'data' => null, 'status' => 0]);
+        }
+    }
 }

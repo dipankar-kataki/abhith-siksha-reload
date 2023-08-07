@@ -200,7 +200,7 @@
                             <a class="nav-link" href="{{ route('admin.get.create.addon.page') }}">Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">List</a>
+                            <a class="nav-link" href="{{route('admin.get.addon.list')}}">List</a>
                         </li>
                     </ul>
                 </div>

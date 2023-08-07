@@ -244,6 +244,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('addons')->group(function() {
         Route::get('get-create-addon-page', [AddonsController::class, 'getCreateAddonPage'])->name('admin.get.create.addon.page');
         Route::post('create-addon', [AddonsController::class, 'createAddon'])->name('admin.create.addon');
+        Route::get('list', [AddonsController::class, 'addonList'])->name('admin.get.addon.list');
+        Route::post('change-status', [AddonsController::class, 'changeStatus'])->name('admin.change.addon.status');
     });
 
 
