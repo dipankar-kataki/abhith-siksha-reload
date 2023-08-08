@@ -11,4 +11,8 @@ class Addon extends Model
 
     protected $table = 'addons';
     protected $guarded = [];
+
+    public function assignSubject(){
+        return $this->belongsTo(AssignSubject::class, 'subject_id', 'id');
+    }
 }

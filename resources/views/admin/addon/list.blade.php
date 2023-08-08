@@ -48,16 +48,19 @@
                     <table id="addon_table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th> # </th>
+                                <th> Sl. No.</th>
                                 <th> Name </th>
                                 <th> Addon Type </th>
                                 <th>Price</th>
                                 <th>File</th>
+                                <th>Related To Subject</th>
+                                <th>Subject Name</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{-- @dd('Addons List ===>', $addonList) --}}
                             @foreach ($addonList as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
@@ -69,6 +72,20 @@
                                             <a href="{{asset($item->file_path)}}" target="_blank" style="text-decoration: none;">View PDF</a>
                                         @else
                                             <a href="{{asset($item->file_path)}}" target="_blank" style="text-decoration: none;">View Image</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->subject_id == null)
+                                            <span class="text-danger">NO</span>
+                                        @else
+                                            <span class="text-success">YES</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->assignSubject != null)
+                                            <strong>{{$item->assignSubject->subject_name}}</strong>
+                                        @else
+                                            <strong class="text-muted">Not Provided</strong>
                                         @endif
                                     </td>
                                     <td>

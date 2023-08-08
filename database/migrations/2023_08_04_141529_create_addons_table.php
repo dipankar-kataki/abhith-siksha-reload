@@ -22,7 +22,7 @@ class CreateAddonsTable extends Migration
             $table->boolean('status')->default(1);
             $table->timestamps();
 
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('subject_id')->references('id')->on('assign_subjects');
 
         });
     }

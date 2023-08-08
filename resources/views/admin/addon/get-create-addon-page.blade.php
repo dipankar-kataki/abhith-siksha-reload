@@ -51,10 +51,9 @@
                                 <option value="no">NO</option>
                             </select>
                         </div>
-                        {{-- @dd('Subject Details ===>>> ', $subjects) --}}
                         <div class="mb-3 d-none" id="selectSubjectDiv">
                             <label>Select Any Subject</label>
-                            <select name="subject" id="subject" class="form-control" required>
+                            <select name="subject_id" id="subject" class="form-control">
                                 <option value=''>- Select -</option>
                                 @foreach ($subjects as $item)
                                     <option value="{{$item->id}}">{{$item->subject_name}}/Class-{{$item->assignClass->class}}/Board-{{$item->boards->exam_board}}</option>
@@ -92,6 +91,7 @@
             let addonType = $('#addonType').val();
             let addonFile = $('#addonFile').val();
             let addonFileExtension = addonFile.split('.')[1];
+            let isRelated = document.getElementById('isRelated');
 
             // console.log('addonType ===>', addonType);
             // console.log('addonFileExtension ===>', addonFileExtension);
@@ -112,6 +112,15 @@
 
                 $('#createAddonBtn').attr('disabled', false);
                 $('#createAddonBtn').text('Submit');
+            }else if( (isRelated.value == 'yes') && (document.getElementById('subject').value == '') ){
+                    Swal.fire({
+                        icon:'error',
+                        text:'Oops! Please Select At least One Subject.'
+                    });
+
+                    $('#createAddonBtn').attr('disabled', false);
+                    $('#createAddonBtn').text('Submit');
+                
             }else{
                 let formData = new FormData(this);
            
@@ -131,12 +140,15 @@
                                 text:response.message
                             });
 
-                            console.log(response.data)
-
                             $('#createAddonForm')[0].reset();
                             $('#createAddonBtn').attr('disabled', false);
                             $('#createAddonBtn').text('Submit');
                         }else{
+
+                            Swal.fire({
+                                icon:'error',
+                                text:response.message
+                            });
                             $('#createAddonBtn').attr('disabled', false);
                             $('#createAddonBtn').text('Submit');
                         }
