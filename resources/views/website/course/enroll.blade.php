@@ -115,6 +115,9 @@
     a:hover {
         color: blue;
     }
+    .addon-details .card{
+       aspect-ratio:2/2;
+    }
     .addon-details .card .card-body{
        display: flex;
        flex-direction: column;
@@ -122,14 +125,14 @@
        align-items: center;
     }
     .addon-details .card .card-body img{
-        width:50%;
-        aspect-ratio:3/2;
+        width:40%;
+        /* aspect-ratio:2/2; */
     }
     .addon-details .addon-name{
         font-size: 13px;
         font-weight: 600;
         margin-top:5px;
-        margin-bottom:2px;
+        margin-bottom:0px;
     }
 
     .addon-details .addon-to-cart-btn{

@@ -32,7 +32,7 @@
                     <form class="form-horizontal" id="createAddonForm">
                         <div class="mb-3">
                             <label>Enter Addon Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="e.g roadmap" minlength="3" maxlength="60" required>
+                            <input type="text" name="name" class="form-control" placeholder="e.g roadmap" minlength="3" maxlength="40" required>
                         </div>
                         <div class="mb-3">
                             <label>Select Addon Type</label>
