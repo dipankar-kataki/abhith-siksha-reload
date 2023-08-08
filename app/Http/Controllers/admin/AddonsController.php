@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Addon;
+use App\Models\AssignSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Validator;
 class AddonsController extends Controller
 {
     public function getCreateAddonPage(){
-        return view('admin.addon.get-create-addon-page');
+        $get_subjects = AssignSubject::with('assignClass', 'boards')->where('is_activate', 1)->get();
+        return view('admin.addon.get-create-addon-page')->with(['subjects' => $get_subjects]);
     }
 
     public function createAddon(Request $request){

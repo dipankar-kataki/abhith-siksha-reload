@@ -44,6 +44,25 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label>Related To Any Subject</label>
+                            <select name="isRelated" id="isRelated" class="form-control" required onchange="isRelatedToSubject()">
+                                <option value=''>- Select -</option>
+                                <option value="yes">YES</option>
+                                <option value="no">NO</option>
+                            </select>
+                        </div>
+                        {{-- @dd('Subject Details ===>>> ', $subjects) --}}
+                        <div class="mb-3 d-none" id="selectSubjectDiv">
+                            <label>Select Any Subject</label>
+                            <select name="subject" id="subject" class="form-control" required>
+                                <option value=''>- Select -</option>
+                                @foreach ($subjects as $item)
+                                    <option value="{{$item->id}}">{{$item->subject_name}}/Class-{{$item->assignClass->class}}/Board-{{$item->boards->exam_board}}</option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label>Enter Price</label>
                             <input type="number" name="price" class="form-control" placeholder='e.g 1000'  min="1" max="99999" maxlength="5" required>
                         </div>
@@ -129,5 +148,15 @@
                 });
             }
         });
+
+        function isRelatedToSubject(){
+            let isRelated = document.getElementById('isRelated').value;
+            let subjectDiv = document.getElementById('selectSubjectDiv');
+            if(isRelated == 'yes'){
+                subjectDiv.classList.remove('d-none');
+            }else{
+                subjectDiv.classList.add('d-none');
+            }
+        }
     </script>
 @endsection
