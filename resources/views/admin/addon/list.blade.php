@@ -55,6 +55,8 @@
                                 <th>File</th>
                                 <th>Related To Subject</th>
                                 <th>Subject Name</th>
+                                <th>For Class</th>
+                                <th>Exam Board</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -83,9 +85,23 @@
                                     </td>
                                     <td>
                                         @if ($item->assignSubject != null)
-                                            <strong>{{$item->assignSubject->subject_name}}</strong>
+                                            <span>{{$item->assignSubject->subject_name}}</span>
                                         @else
-                                            <strong class="text-muted">Not Provided</strong>
+                                            <span class="text-muted">Not Provided</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->assignClass != null)
+                                            <span>{{$item->assignClass->class}}</span>
+                                        @else
+                                            <span class="text-muted">Not Provided</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->boards != null)
+                                            <span>{{$item->boards->exam_board}}</span>
+                                        @else
+                                            <span class="text-muted">Not Provided</span>
                                         @endif
                                     </td>
                                     <td>

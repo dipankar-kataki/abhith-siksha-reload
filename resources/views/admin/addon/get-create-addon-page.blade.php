@@ -51,12 +51,14 @@
                                 <option value="no">NO</option>
                             </select>
                         </div>
+                        {{-- @dd($subjects) --}}
                         <div class="mb-3 d-none" id="selectSubjectDiv">
                             <label>Select Any Subject</label>
                             <select name="subject_id" id="subject" class="form-control">
                                 <option value=''>- Select -</option>
+                                
                                 @foreach ($subjects as $item)
-                                    <option value="{{$item->id}}">{{$item->subject_name}}/Class-{{$item->assignClass->class}}/Board-{{$item->boards->exam_board}}</option>
+                                    <option value="{{$item->id}}" data-board="{{$item->assignClass->board_id}}" data-class="{{$item->assignClass->id}}">{{$item->subject_name}}/Class-{{$item->assignClass->class}}/Board-{{$item->boards->exam_board}}</option>
                                 @endforeach
                                 
                             </select>
@@ -125,6 +127,13 @@
                 let formData = new FormData(this);
            
                 formData.append('addonFile', addonFile );
+
+                let boardId = $('#subject').find(':selected').attr('data-class');
+                let classId = $('#subject').find(':selected').attr('data-board');
+
+                formData.append('boardId', boardId);
+                formData.append('classId', classId);
+
 
                 $.ajax({
                     url:"{{route('admin.create.addon')}}",

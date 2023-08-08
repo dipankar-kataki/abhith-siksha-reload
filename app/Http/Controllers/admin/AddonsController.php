@@ -44,6 +44,8 @@ class AddonsController extends Controller
 
                 Addon::create([
                     'subject_id' => $request->subject_id,
+                    'board_id' => $request->boardId == 'undefined' ? null : $request->boardId,
+                    'class_id' => $request->classId == 'undefined' ? null : $request->classId,
                     'name' => $request->name,
                     'type' => $request->type,
                     'price' => $request->price,
@@ -52,13 +54,13 @@ class AddonsController extends Controller
 
                 return response()->json(['message' => 'Great! Addon Created Succesfully.', 'data' => null, 'status' => 1]);
             }catch(\Exception $e){
-                return response()->json(['message' => 'Oops! Something Went Wrong.'.$e->getMessage(), 'data' => null, 'status' => 0]);
+                return response()->json(['message' => 'Oops! Something Went Wrong.', 'data' => null, 'status' => 0]);
             }
         }
     }
 
     public function addonList(){
-        $addonList = Addon::with('assignSubject')->orderBy('created_at', 'desc')->get();
+        $addonList = Addon::with('assignSubject', 'assignClass', 'boards')->orderBy('created_at', 'desc')->get();
         return view('admin.addon.list')->with(['addonList' => $addonList]);
     }
 
