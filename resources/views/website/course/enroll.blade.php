@@ -115,6 +115,27 @@
     a:hover {
         color: blue;
     }
+    .addon-details .card .card-body{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+    }
+    .addon-details .card .card-body img{
+        width:50%;
+        aspect-ratio:3/2;
+    }
+    .addon-details .addon-name{
+        font-size: 13px;
+        font-weight: 600;
+        margin-top:5px;
+        margin-bottom:2px;
+    }
+
+    .addon-details .addon-to-cart-btn{
+        font-size: 11px;
+        font-weight: 700;
+    }
 </style>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
@@ -317,6 +338,35 @@
                             </label>
                         </div>
                     </div>
+                    <hr>
+                    @if ($related_addon_items != null)
+                        <div class="mb-2">
+                            <strong for="">Addons</strong>
+                        </div> 
+                    @endif
+                    
+
+                    <div class="owl-carousel mt-4">
+                        @forelse ($related_addon_items as $item)
+                            <div class="addon-details">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if ($item->type == 'pdf')
+                                            <img src="{{asset('asset_website/img/pdf-icon.png')}}" alt="pdf-icon">
+                                        @else
+                                            <img src="{{asset($item->file_path)}}" alt="addon image">
+                                        @endif
+                                        <p class="addon-name">{{$item->name}}</p>
+                                        <p class="addon-price" style=""><i class="fa fa-inr text-success" aria-hidden="true"></i> {{$item->price}}</p>
+                                        <a href="#" class="btn btn-light btn-xs addon-to-cart-btn">Add To Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            
+                        @endforelse
+                        
+                    </div>
                     <!-- /.radio-card -->
 
                     <!-- <label for="radio-card-2" class="radio-card">
@@ -338,25 +388,25 @@
                     <input type="hidden" name="board_id" value="{{$data['board']->id}}">
                     <input type="hidden" name="class_id" value="{{$data['assignclass']->id}}">
                     @foreach($data['subjects'] as $key=>$subject)
-                    @if($data['subjects'][$key]['already_purchase']==0)
-                    <div class="inputGroup">
-                        <input class="chapter_value" id="option{{$key}}" type="checkbox"
-                            value="{{$data['subjects'][$key]['id']}}" name="subjects[]"
-                            data-price="{{number_format($data['subjects'][$key]['subject_amount'],2,'.','')}}"
-                            onclick="checkedSubject()" />
-                        <label for="option{{$key}}">
-                            <a
-                                href="{{route('website.subject.detatils',Crypt::encrypt($data['subjects'][$key]['id']))}}">
-                                <i class="fa fa-external-link mr-2" aria-hidden="true"></i>
-                                {{$data['subjects'][$key]['subject_name']}}(
-                                <i class="fa fa-inr" aria-hidden="true"></i>
-                                {{number_format($data['subjects'][$key]['subject_amount'],2,'.','')
-                                }}
-                                )
-                            </a>
-                        </label>
-                    </div>
-                    @endif
+                        @if($data['subjects'][$key]['already_purchase']==0)
+                            <div class="inputGroup">
+                                <input class="chapter_value" id="option{{$key}}" type="checkbox"
+                                    value="{{$data['subjects'][$key]['id']}}" name="subjects[]"
+                                    data-price="{{number_format($data['subjects'][$key]['subject_amount'],2,'.','')}}"
+                                    onclick="checkedSubject()" />
+                                <label for="option{{$key}}">
+                                    <a
+                                        href="{{route('website.subject.detatils',Crypt::encrypt($data['subjects'][$key]['id']))}}">
+                                        <i class="fa fa-external-link mr-2" aria-hidden="true"></i>
+                                        {{$data['subjects'][$key]['subject_name']}}(
+                                        <i class="fa fa-inr" aria-hidden="true"></i>
+                                        {{number_format($data['subjects'][$key]['subject_amount'],2,'.','')
+                                        }}
+                                        )
+                                    </a>
+                                </label>
+                            </div>
+                        @endif
                     @endforeach
                     <hr>
                     <div class="total">
@@ -377,17 +427,37 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-      var courseType= $("#radio-card-2").val();
-      $(".chapter_value").each(function(index) {
-                var subject_id=@json($subject_id);
-                if(subject_id==$(this).attr('value')){
-                    $(this).prop("checked", true); 
-                }else{
-                    $(this).prop("checked", false);
-                    $(this).prop("disabled", false);
-                }
-           });
+        var courseType= $("#radio-card-2").val();
+        $(".chapter_value").each(function(index) {
+            var subject_id=@json($subject_id);
+            if(subject_id==$(this).attr('value')){
+                $(this).prop("checked", true); 
+            }else{
+                $(this).prop("checked", false);
+                $(this).prop("disabled", false);
+            }
+        });
         
+        $(".owl-carousel").owlCarousel({
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:2,
+                    nav:false
+                },
+                1200:{
+                    items:3,
+                    nav:true,
+                    loop:false
+                }
+            }
+        });
      });
    function changeCourse(value){
         if(value==1){

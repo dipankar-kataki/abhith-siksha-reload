@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Addon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
@@ -117,6 +118,9 @@ class CourseController extends Controller
             $board = Board::find($subject->board_id);
             $Assignclass = AssignClass::find($subject->assign_class_id);
             $total_amount = 0;
+
+            $related_addon_items = Addon::where('subject_id', $subject_id)->where('status', 1)->get();
+
             foreach ($subjects as $key => $subjectDetail) {
                 if (subjectAlreadyPurchase($subjectDetail->id) == 1) {
                     $total_amount = $total_amount + 0;
@@ -157,7 +161,7 @@ class CourseController extends Controller
                 'subjectamount' => $subject->subject_amount,
             ];
 
-            return view('website.course.enroll', compact('data', 'subject_id', 'total_subject'));
+            return view('website.course.enroll', compact('data', 'subject_id', 'total_subject', 'related_addon_items'));
         } catch (\Throwable $th) {
             //throw $th;
         }
