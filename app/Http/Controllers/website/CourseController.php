@@ -119,7 +119,7 @@ class CourseController extends Controller
             $Assignclass = AssignClass::find($subject->assign_class_id);
             $total_amount = 0;
 
-            $related_addon_items = Addon::where('subject_id', $subject_id)->where('status', 1)->get();
+            $related_addon_items = Addon::where('class_id', $subject->assign_class_id)->where('status', 1)->get();
 
             foreach ($subjects as $key => $subjectDetail) {
                 if (subjectAlreadyPurchase($subjectDetail->id) == 1) {

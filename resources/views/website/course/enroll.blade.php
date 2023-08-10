@@ -115,30 +115,115 @@
     a:hover {
         color: blue;
     }
-    .addon-details .card{
-       aspect-ratio:2/2;
+    .addons-div{
+        height:300px;
+        overflow: auto;
+        scroll-behavior: smooth;
     }
-    .addon-details .card .card-body{
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       align-items: center;
-    }
-    .addon-details .card .card-body img{
-        width:40%;
-        /* aspect-ratio:2/2; */
-    }
-    .addon-details .addon-name{
-        font-size: 13px;
-        font-weight: 600;
-        margin-top:5px;
-        margin-bottom:0px;
+    .addon-details{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 10px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        border: 1px solid #d0cfcf;
+        border-radius: 5px;
+        margin-bottom: 15px;
+
     }
 
-    .addon-details .addon-to-cart-btn{
-        font-size: 11px;
-        font-weight: 700;
+    .addon-details .addon-image{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
+    .addon-details .addon-image img{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        border: 1px solid #e8e8e8;
+        padding: 5px;
+
+    }
+    .addon-details .addon-image .addon-name p{
+        margin-left: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom:2px;
+    }
+
+    .addon-details .addon-select{
+        margin-right: 30px;
+    }
+    
+    /* ===== Scrollbar CSS ===== */
+
+    /* Firefox */
+    * {
+        scrollbar-width: auto;
+        scrollbar-color: #d4d9ec #ffffff;
+    }
+
+    /* Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+        width: 11px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: #d4d9ec;
+        border-radius: 10px;
+        border: 3px solid #ffffff;
+    }
+
+    .round {
+  position: relative;
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 7px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: #66bb6a;
+  border-color: #66bb6a;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
 </style>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
@@ -342,34 +427,7 @@
                         </div>
                     </div>
                     <hr>
-                    @if ($related_addon_items != null)
-                        <div class="mb-2">
-                            <strong for="">Addons</strong>
-                        </div> 
-                    @endif
                     
-
-                    <div class="owl-carousel mt-4">
-                        @forelse ($related_addon_items as $item)
-                            <div class="addon-details">
-                                <div class="card">
-                                    <div class="card-body">
-                                        @if ($item->type == 'pdf')
-                                            <img src="{{asset('asset_website/img/pdf-icon.png')}}" alt="pdf-icon">
-                                        @else
-                                            <img src="{{asset($item->file_path)}}" alt="addon image">
-                                        @endif
-                                        <p class="addon-name">{{$item->name}}</p>
-                                        <p class="addon-price" style=""><i class="fa fa-inr text-success" aria-hidden="true"></i> {{$item->price}}</p>
-                                        <a href="#" class="btn btn-light btn-xs addon-to-cart-btn">Add To Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            
-                        @endforelse
-                        
-                    </div>
                     <!-- /.radio-card -->
 
                     <!-- <label for="radio-card-2" class="radio-card">
@@ -411,6 +469,46 @@
                             </div>
                         @endif
                     @endforeach
+
+                    @if ($related_addon_items != null)
+                        <div class="mb-3 mt-4">
+                            <h5 for="">Addons</h5>
+                        </div> 
+                    @endif
+                        
+                    
+                        <div class="addons-div">
+                            @forelse ($related_addon_items as $addon_key => $item)
+                                <div class="addon-details">
+                                    <div class="addon-image">
+                                        @if ($item->type == 'pdf')
+                                            <img src="{{asset('asset_website/img/pdf-icon.png')}}" alt="pdf-icon">
+                                            <div class="addon-name">
+                                                <p>{{$item->name}}</p>
+                                                <p><i class="fa fa-inr text-success" aria-hidden="true"></i> {{$item->price}}</p>
+                                            </div>
+                                        @else
+                                            <img src="{{asset($item->file_path)}}" alt="addon image">
+                                            <div class="addon-name">
+                                                <p>{{$item->name}}</p>
+                                                <p><i class="fa fa-inr text-success" aria-hidden="true"></i> {{$item->price}}</p>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="addon-select">
+                                        <div class="round">
+                                            <input type="checkbox" id="checkbox" />
+                                            <label for="checkbox"></label>
+                                        </div>
+                                        {{-- <input class="addon-value checkbox-round" id="addonOption{{$addon_key}}" 
+                                            type="checkbox" value="{{$item->id}}" name="addons[]" 
+                                            data-price="{{$item->price}}" onclick="checkedSubject()" /> --}}
+                                    </div>
+                                </div>
+                            @empty
+                            @endforelse
+                        </div>
+
                     <hr>
                     <div class="total">
                         <p class=""><b>Total</b></p>
