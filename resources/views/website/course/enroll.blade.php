@@ -224,6 +224,11 @@
   opacity: 1;
 }
 
+input.largerCheckbox {
+    width: 20px;
+    height: 20px;
+}
+
 </style>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
@@ -497,10 +502,9 @@
                                     </div>
                                     <div class="addon-select">
                                         <div class="round1">
-                                            <input type="checkbox" id="checkbox" class="addons-value" value="{{$item->id}}" name="addons[]"
+                                            <input type="checkbox" class="addons-value largerCheckbox" value="{{$item->id}}" name="addons[]"
                                             data-price="{{$item->price}}"
                                             onclick="checkedSubject()"/>
-                                            <label for="checkbox"></label>
                                         </div>
                                         {{-- <input class="addon-value checkbox-round" id="addonOption{{$addon_key}}" 
                                             type="checkbox" value="{{$item->id}}" name="addons[]" 

@@ -53,6 +53,8 @@ class CartController extends Controller
     }
     public function addToCart(Request $request)
     {
+
+        dd('Add To Cart Check Response', $request->all());
         try {
 
             if (!Auth::check()) {
