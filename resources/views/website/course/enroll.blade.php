@@ -496,8 +496,10 @@
                                         @endif
                                     </div>
                                     <div class="addon-select">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox" />
+                                        <div class="round1">
+                                            <input type="checkbox" id="checkbox" class="addons-value" value="{{$item->id}}" name="addons[]"
+                                            data-price="{{$item->price}}"
+                                            onclick="checkedSubject()"/>
                                             <label for="checkbox"></label>
                                         </div>
                                         {{-- <input class="addon-value checkbox-round" id="addonOption{{$addon_key}}" 
@@ -584,10 +586,20 @@
         }
    }
    function checkedSubject(){
+    
     var total_subject=@json($total_subject);
     var totalAmount=0.00;
+   
     var count=0;
       $(".chapter_value").each(function(index) {
+          if(this.checked==true){     
+            count+=1;    
+            totalAmount= parseFloat(totalAmount) + parseFloat($(this).attr('data-price'));
+          }
+         
+      });
+
+      $(".addons-value").each(function(index) {
           if(this.checked==true){     
             count+=1;    
             totalAmount= parseFloat(totalAmount) + parseFloat($(this).attr('data-price'));
