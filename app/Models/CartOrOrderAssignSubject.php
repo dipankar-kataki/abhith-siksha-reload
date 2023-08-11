@@ -16,6 +16,7 @@ class CartOrOrderAssignSubject extends Model
         'assign_subject_id',
         'amount',
         'type',
+        'addons_id'
     ];
     public function subject(){
         return $this->belongsTo(AssignSubject::class,'assign_subject_id','id');

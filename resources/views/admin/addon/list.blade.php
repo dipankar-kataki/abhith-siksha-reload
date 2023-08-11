@@ -63,7 +63,7 @@
                         </thead>
                         <tbody>
                             {{-- @dd('Addons List ===>', $addonList) --}}
-                            @foreach ($addonList as $key => $item)
+                            @forelse ($addonList as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->name }}</td>
@@ -120,7 +120,9 @@
                                         @endif
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

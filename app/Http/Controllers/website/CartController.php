@@ -77,17 +77,14 @@ class CartController extends Controller
             }
             
 
-            
-
-            // dd('Addons Data -->', $get_addons);
             $total_addons_amount = 0;
 
-           if( ($request->is_addons_selected == 1) && (!($request->addons == null)) ){
+            if( ($request->is_addons_selected == 1) && (!($request->addons == null)) ){
                 $get_addons = Addon::whereIn('id', $request->addons)->get();
                 foreach($get_addons as $key => $item){
                     $total_addons_amount += $item->price;
                 }
-           }
+            }
 
         //    dd('Addons Total Amount', $total_addons_amount);
 
@@ -101,6 +98,7 @@ class CartController extends Controller
                     'is_addons_selected' => $request->is_addons_selected
                 ]);
                 foreach ($all_subjects as $key => $subject) {
+                    
                     $data = [
                         'cart_id' => $cart->id,
                         'assign_subject_id' => $all_subjects[$key]['id'],
@@ -109,6 +107,8 @@ class CartController extends Controller
                     ];
 
                     $assign_subject = CartOrOrderAssignSubject::create($data);
+                        
+
                 }
                 $user_detail = UserDetails::where('user_id', Auth::user()->id)->first();
                 $total_amount = totalAmountCart($cart->id);

@@ -145,6 +145,7 @@
         border-radius: 50%;
         border: 1px solid #e8e8e8;
         padding: 5px;
+        object-fit: contain;
 
     }
     .addon-details .addon-image .addon-name p{
@@ -474,11 +475,11 @@ input.largerCheckbox {
                     @endforeach
 
                     {{-- Addons Code Started  --}}
-                    @if ($related_addon_items != null)
+                    @if (!$related_addon_items->isEmpty())
                         <div class="mb-3 mt-4">
                             <h5 for="">Addons</h5>
                         </div> 
-                    @endif
+                    
                         
                     
                         <div class="addons-div">
@@ -509,8 +510,10 @@ input.largerCheckbox {
                                     </div>
                                 </div>
                             @empty
+                                
                             @endforelse
                         </div>
+                    @endif
                     {{-- Addons Code Ended --}}
                     <hr>
                     <div class="total">
@@ -631,11 +634,11 @@ input.largerCheckbox {
         buynow.style.display='none';
       }else{
         if(( count == 0) && (!(addon_count == 0))){
-
-            console.log('Count ===> ', count);
-            console.log('Addon Count ==>', addon_count);
             alert('Oops! Select at least one subject to proceed further.');
             $(".addons-value").prop('checked', false);
+            $("#total_price").html(amount+'0.00');
+            box.style.display = 'none';
+            buynow.style.display='none';
         }else{
             box.style.display = 'block';
             buynow.style.display='block';
