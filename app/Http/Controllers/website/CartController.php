@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Addon;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Chapter;
@@ -54,7 +55,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
 
-        dd('Add To Cart Check Response', $request->all());
+        // dd('Add To Cart Check Response', $request->all());
         try {
 
             if (!Auth::check()) {
@@ -66,18 +67,38 @@ class CartController extends Controller
             $board_id = $request->board_id;
             $class_id = $request->class_id;
             $course_type = $request->course_type;
-            if ($course_type == 1) {
-                $all_subjects = AssignSubject::where(['board_id' => $board_id, 'assign_class_id' => $class_id, 'is_activate' => 1])->get();
-            } else {
-                $all_subjects = AssignSubject::whereIn('id', $request->subjects)->get();
+
+            if($request->subjects != null){
+                if ($course_type == 1) {
+                    $all_subjects = AssignSubject::where(['board_id' => $board_id, 'assign_class_id' => $class_id, 'is_activate' => 1])->get();
+                } else {
+                    $all_subjects = AssignSubject::whereIn('id', $request->subjects)->get();
+                }
             }
-            if ($request->buynow == 1) {
+            
+
+            
+
+            // dd('Addons Data -->', $get_addons);
+            $total_addons_amount = 0;
+
+           if( ($request->is_addons_selected == 1) && (!($request->addons == null)) ){
+                $get_addons = Addon::whereIn('id', $request->addons)->get();
+                foreach($get_addons as $key => $item){
+                    $total_addons_amount += $item->price;
+                }
+           }
+
+        //    dd('Addons Total Amount', $total_addons_amount);
+
+            if ($request->buynow == 1 ) {
                 $cart = Cart::create([
                     'user_id' => auth()->user()->id,
                     'board_id' => $board_id, //board_id
                     'assign_class_id' => $class_id, //class_id
                     'is_full_course_selected' => $course_type,
-                    'is_buy' => $request->buynow
+                    'is_buy' => $request->buynow,
+                    'is_addons_selected' => $request->is_addons_selected
                 ]);
                 foreach ($all_subjects as $key => $subject) {
                     $data = [

@@ -431,8 +431,6 @@ input.largerCheckbox {
                             </label>
                         </div>
                     </div>
-                    <hr>
-                    
                     <!-- /.radio-card -->
 
                     <!-- <label for="radio-card-2" class="radio-card">
@@ -475,6 +473,7 @@ input.largerCheckbox {
                         @endif
                     @endforeach
 
+                    {{-- Addons Code Started  --}}
                     @if ($related_addon_items != null)
                         <div class="mb-3 mt-4">
                             <h5 for="">Addons</h5>
@@ -483,6 +482,7 @@ input.largerCheckbox {
                         
                     
                         <div class="addons-div">
+                            <input type="hidden" id="isAddonsSelected" name="is_addons_selected" value=0>
                             @forelse ($related_addon_items as $addon_key => $item)
                                 <div class="addon-details">
                                     <div class="addon-image">
@@ -506,15 +506,12 @@ input.largerCheckbox {
                                             data-price="{{$item->price}}"
                                             onclick="checkedSubject()"/>
                                         </div>
-                                        {{-- <input class="addon-value checkbox-round" id="addonOption{{$addon_key}}" 
-                                            type="checkbox" value="{{$item->id}}" name="addons[]" 
-                                            data-price="{{$item->price}}" onclick="checkedSubject()" /> --}}
                                     </div>
                                 </div>
                             @empty
                             @endforelse
                         </div>
-
+                    {{-- Addons Code Ended --}}
                     <hr>
                     <div class="total">
                         <p class=""><b>Total</b></p>
@@ -594,7 +591,7 @@ input.largerCheckbox {
     var total_subject=@json($total_subject);
     var totalAmount=0.00;
    
-    var count=0;
+    var count=0; var addon_count = 0;
       $(".chapter_value").each(function(index) {
           if(this.checked==true){     
             count+=1;    
@@ -604,8 +601,8 @@ input.largerCheckbox {
       });
 
       $(".addons-value").each(function(index) {
-          if(this.checked==true){     
-            count+=1;    
+          if(this.checked==true){    
+            addon_count+=1; 
             totalAmount= parseFloat(totalAmount) + parseFloat($(this).attr('data-price'));
           }
          
@@ -616,19 +613,40 @@ input.largerCheckbox {
       }else{
         $("#radio-card-2").prop("checked", true);
       }
+
+      if(addon_count > 0){
+        $('#isAddonsSelected').val(1);
+      }
      
       var amount=`<i class="fa fa-inr" aria-hidden="true"></i> &nbsp;`;
      
       $("#total_price").html(amount+totalAmount.toFixed(2));
       const box = document.getElementById('add-to-cart');
       const buynow=document.getElementById('buy-now');
-      if(count==0){
+
+      
+
+      if( (count==0) && (addon_count == 0)  ){
         box.style.display = 'none';
         buynow.style.display='none';
       }else{
-        box.style.display = 'block';
-        buynow.style.display='block';
+        if(( count == 0) && (!(addon_count == 0))){
+
+            console.log('Count ===> ', count);
+            console.log('Addon Count ==>', addon_count);
+            alert('Oops! Select at least one subject to proceed further.');
+            $(".addons-value").prop('checked', false);
+        }else{
+            box.style.display = 'block';
+            buynow.style.display='block';
+        }
+        
       }  
+
+
+      
+
+
     }
 </script>
 
