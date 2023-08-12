@@ -1,6 +1,6 @@
 @extends('layout.website.website')
 
-@section('title', 'Gallery')
+@section('title', 'Contact Us')
 
 @section('head')
     <link href="{{ asset('asset_website/css/jquery.fancybox.css') }}" rel="stylesheet">
