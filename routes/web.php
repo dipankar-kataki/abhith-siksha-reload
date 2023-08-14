@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Website\DocumentController;
+use App\Http\Controllers\website\DocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\LessonController;
