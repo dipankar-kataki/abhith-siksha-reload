@@ -5,7 +5,10 @@
 @section('head')
     <style>
         p{
-            font-size: 14px;
+            font-size: 16px;
+        }
+        ul li{
+            font-size: 16px;
         }
     </style>
 @endsection
@@ -16,8 +19,8 @@
         <div class="row  mt-5">
             <div class="col-lg-12 p2">
                 <div class="mb-4">
-                    <div class="text-center mb-">
-                        <h4>Privacy Policy</h4>
+                    <div class="text-center" style="margin-top:10px;margin-bottom:50px;">
+                        <h2>Privacy Policy</h2>
                     </div>
                     <p>
                         Abhith Siksha is a Proprietorship Firm (along with its subsidiaries and affiliates, collectively 
