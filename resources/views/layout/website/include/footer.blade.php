@@ -22,19 +22,19 @@
             </div>
         </div>
         <div class="row footer-mid">
-            <div class="col-lg-4 footer-first p0">
+            <div class="col-lg-3 footer-first p0">
                 <h5 class="small-heading-black">Contact us</h5>
-                <p class="mb0">Latasil, Uzan Bazar, Guwahati,<br />
-                    Assam 781001</p>
-                <p class="mb0">example@gmail.com</p>
+                <p class="mb0">16/34 F.C. Road, Uzanbazar, Guwahati-1,<br />
+                    Near Income Tax Office, Assam, India</p>
+                <p class="mb0">office.abhithsiksha@gmail.com</p>
             </div>
-            <div class="col-lg-4 footer-second p0">
+            <div class="col-lg-5 footer-second p0">
                 <h5 class="small-heading-black">Quick Links</h5>
                 <ul class="list-inline footer-list mb0">
                     <li>
                         <ul class="mb0">
                             <li><a href="{{route('website.dashboard')}}">Home</a></li>
-                            <li><a href="{{route('website.about')}}">About us</a></li>
+                            <li><a href="{{route('website.about')}}">AboutUs</a></li>
                             <li><a href="{{route('website.course')}}">Courses</a></li>
                         </ul>
                     </li>
@@ -43,6 +43,13 @@
                             <li><a href="{{route('website.blog')}}">Blogs</a></li>
                             <li><a href="{{route('website.knowledge.forum')}}">Knowledge Forum</a></li>
                             <li><a href="{{route('website.contact')}}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="mb0">
+                            <li><a href="{{route('website.privacy.policy')}}">Privacy Policy</a></li>
+                            <li><a href="{{route('website.terms.and.condition')}}">Terms & Conditions</a></li>
+                            <li><a href="{{route('website.cancellation.and.refund')}}">Cancellation & Refund Policy</a></li>
                         </ul>
                     </li>
                 </ul>

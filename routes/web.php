@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Website\DocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\LessonController;
@@ -37,6 +38,10 @@ use App\Http\Middleware\WebSite;
 */
 
 Route::get('', [DashboardController::class, 'index'])->name('website.dashboard');
+
+Route::get('privacy-policy', [DocumentController::class, 'privacyPolicy'])->name('website.privacy.policy');
+Route::get('terms-and-condition', [DocumentController::class, 'termsAndCondition'])->name('website.terms.and.condition');
+Route::get('cancellation-and-refund', [DocumentController::class, 'cancellationAndRefund'])->name('website.cancellation.and.refund');
 
 // Route::get('dashboard', function () {
 //     return view('admin.dashboard.dashboard');

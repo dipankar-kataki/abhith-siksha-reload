@@ -54,8 +54,7 @@
                     </div>
                     <div>
                         <h4 data-brackets-id="12020" class="small-heading-black mb20">Our Numbers</h4>
-                        <p class="mb0">0123456789</p>
-                        <p>0123456789</p>
+                        <p class="mb0">+91-96780-83808</p>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -65,11 +64,11 @@
                             width="100%" height="290" frameborder="0" style="border:0;border-radius: 8px;"
                             allowfullscreen></iframe>
                     </div>
-                    <div>
+                    {{-- <div>
                         <h4 data-brackets-id="12020" class="small-heading-black mb20">Our Numbers</h4>
-                        <p>Latasil, Uzan Bazar, <br />
-                            Guwahati, Assam 781001</p>
-                    </div>
+                        <p>16/34 F.C. Road, Uzanbazar, <br />
+                            Guwahati-1 Near Income Tax Office, Assam, India</p>
+                    </div> --}}
                 </div>
             </div>
         </div>
