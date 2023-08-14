@@ -188,7 +188,7 @@
 
              {{-- For Addons --}}
 
-            <li class="nav-item {{ request()->routeIs('admin.get.create.addon.page') ? 'active' : '' }}">
+            {{-- <li class="nav-item {{ request()->routeIs('admin.get.create.addon.page') ? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#addonsSubMenu" aria-expanded="false" aria-controls="ui-basic">
                     <span class="menu-title">Addons</span>
                     <i class="menu-arrow"></i>
@@ -204,7 +204,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
         @endif
     </ul>
 </nav>
