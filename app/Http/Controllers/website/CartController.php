@@ -108,6 +108,7 @@ class CartController extends Controller
                     $get_addons = Addon::whereIn('id', $request->addons)->get();
                     foreach($get_addons as $key => $addon){
                         $data = [
+                            'user_id' => auth()->user()->id,
                             'cart_id' => $cart->id,
                             'addon_id' => $addon->id,
                             'payment_status' => 'pending'

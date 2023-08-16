@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AssignSubject;
 use App\Models\Cart;
 use App\Models\Lesson;
+use App\Models\SelectedAddon;
 use Illuminate\Http\Request;
 use App\Models\UserDetails;
 use App\Models\User;
@@ -24,10 +25,12 @@ class UserDetailsController extends Controller
         if(Auth::check()){
             $user_details = UserDetails::with('user')->where('email',Auth::user()->email)->first();
             $purchase_history = Order::with('board','assignClass','assignSubject')->where('user_id',Auth::user()->id)->where('payment_status','paid')->orderBy('updated_at','DESC')->get();
-         
+            
+            $get_addons = SelectedAddon::with('selectedAddon')->where('user_id', Auth::user()->id)->where('payment_status', 'paid')->get();
         }
+
        
-        return view('website.my_account.my_account')->with(['user_details' => $user_details, 'purchase_history' => $purchase_history]);
+        return view('website.my_account.my_account')->with(['user_details' => $user_details, 'get_addons' => $get_addons , 'purchase_history' => $purchase_history]);
     }
 
 

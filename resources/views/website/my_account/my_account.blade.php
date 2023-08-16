@@ -64,6 +64,10 @@
                                 aria-controls="mycourses">My Courses</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#myaddons" role="tab"
+                                aria-controls="myaddons">My Addons</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#myperformance" role="tab"
                                 aria-controls="myperformance">My Performance</a>
                         </li>
@@ -328,6 +332,90 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tab-pane" id="myaddons" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-12 col-6">
+                                <h4 class="font-weight-bold">My Addons</h4>
+                                {{-- <h4 class="small-heading-black">My Courses</h4> --}}
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                {{-- <table id="addons_purchase_table" class="table table-striped">
+                                    <tbody>
+                                        @forelse ($purchase_history as $key => $item)
+                                        <div class="row mb-4">
+                                            <div class="col-lg-2 col-md-3">
+                                                @if ($item->board->logo == '')
+                                                <img src="{{ asset('asset_website/img/Image.png') }}"
+                                                    style="width:100%; aspect-ratio: 1/1; object-fit:cover; border-radius:10px"
+                                                    alt="">
+
+                                                @else
+                                                <img src="{{ asset($item->board->logo) }}"
+                                                    style="width:100%; aspect-ratio: 1/1; object-fit:cover; border-radius:10px"
+                                                    alt="">
+
+                                                @endif
+                                            </div>
+                                            <div class="col-lg-10 col-md-9">
+                                                <div class="d-flex justify-content-between myCourses-details">
+                                                    <div style="width: 25%; display:flex; flex-direction: column">
+                                                        <h6>Board</h6>
+                                                        <h5 class="font-weight-bold">
+                                                            {{ $item->board->exam_board }}</h5>
+
+                                                        <div class="myCourses-view-btn">
+                                                            <a href="{{ route('website.user.courses', Crypt::encrypt($item->id)) }}"
+                                                                target="_blank" class="btn-sm btn-primary">View
+                                                                Details</a>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 25%">
+                                                        <h6>Class</h6>
+                                                        <h5 class="font-weight-bold">
+                                                            {{ $item->assignClass->class ?? '' }}
+                                                        </h5>
+                                                    </div>
+                                                    <div style="width: 25%">
+                                                        <h6>Course Type</h6>
+                                                        <h5 class="font-weight-bold">
+                                                            @if ($item->is_full_course_selected == 1)
+                                                            Full Course
+                                                            @else
+                                                            Custom package
+                                                            @endif
+                                                        </h5>
+                                                    </div>
+                                                    <div style="width: 25%">
+                                                        <h6>Total Subject(s)</h6>
+                                                        <h5 class="font-weight-bold">
+                                                            @foreach($item->assignSubject as $key=>$subject)
+                                                            <a
+                                                                href="{{route('website.subject.detatils',Crypt::encrypt( $subject->subject->id))}}">{{$key+1}}.
+                                                                {{ $subject->subject->subject_name }}</a><br>
+                                                            @endforeach
+
+                                                        </h5>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        @empty
+                                        <tr>
+                                            <div class="text-center">
+                                                <p>Oops !! No Courses Purchased yet !!</p>
+                                                <div class="shipping-div text-center"><a
+                                                        href="{{ route('website.course') }}"
+                                                        class="shipping-btn">Continue Enrolling</a></div>
+                                            </div>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table> --}}
+                            </div>
+                        </div>
+                    </div>
                     <div class="tab-pane" id="myperformance" role="tabpanel">
                         <div class="row">
                             <div class="col-lg-12 col-6">
@@ -448,6 +536,8 @@
                             <div class="col-lg-12">
                                 <table id="purchase_history_table" class="table table-striped">
                                     @if (!$purchase_history->isEmpty())
+
+                                    <p style="margin-left:20px;font-size:14px;color:rgb(63, 164, 247);">- Purchased Subjects</p>
                                     <thead>
                                         <tr class="text-center">
                                             {{-- <th>Sl No.</th> --}}
@@ -484,6 +574,53 @@
                                             </td>
                                             <td>{{ $item->updated_at->format('d-M-Y') }}</td>
                                             <td><a href="{{route('receipt.download',$item->id)}}">Download</a></td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <div class="text-center">
+                                                <p>Oops! No Courses purchased yet.</p>
+                                                <div class="shipping-div text-center"><a
+                                                        href="{{ route('website.course') }}"
+                                                        class="shipping-btn">Continue
+                                                        Enrolling</a></div>
+                                            </div>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+
+                                <hr class="mt-4">
+
+                                <table id="addons_purchase_table" class="table table-striped">
+                                    @if (!$get_addons->isEmpty())
+
+                                    <p style="margin-left:20px;font-size:14px;color:rgb(204, 63, 247);">- Purchased Addons</p>
+                                    <thead>
+                                        <tr class="text-center">
+                                            {{-- <th>Sl No.</th> --}}
+                                            <th>Board - Class</th>
+                                            <th>Addon Name</th>
+                                            <th>Addon Type</th>
+                                            <th>Total Price</th>
+                                            <th>Purchase Date</th>
+                                        </tr>
+                                    </thead>
+                                    @endif
+                                    <tbody>
+                                        @forelse ($get_addons as $key => $item)
+                                        <tr class="text-center">
+                                            {{-- <td>{{$key + 1}}</td> --}}
+                                            <td>{{ $item->selectedAddon->boards->exam_board }} - Class {{ $item->selectedAddon->assignClass->class }}
+                                            </td>
+                                            <td style="text-align: left">{{$item->selectedAddon->name}}</td>
+                                            <td>
+                                                {{$item->selectedAddon->type}}
+                                            </td>
+
+                                            <td>{{
+                                                $item->selectedAddon->price }}
+                                            </td>
+                                            <td>{{ $item->updated_at->format('d-M-Y') }}</td>
                                         </tr>
                                         @empty
                                         <tr>
@@ -672,6 +809,14 @@
         /*******************************  Purchase History***************************************/
         $(document).ready(function() {
             $('#purchase_history_table').DataTable({
+                "processing": true,
+                dom: 'Bfrtip',
+                buttons: ['excel', 'pdf', 'print'
+
+                ]
+            });
+
+            $('#addons_purchase_table').DataTable({
                 "processing": true,
                 dom: 'Bfrtip',
                 buttons: ['excel', 'pdf', 'print'

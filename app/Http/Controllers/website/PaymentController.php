@@ -113,16 +113,22 @@ class PaymentController extends Controller
                             // }else{
                             //     $cart_assign_subject_update =$cart_assign_subject->delete();
                             // }
+
+                            SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->update([
+                                'order_id' =>  $item->id,
+                                'payment_status' => 'paid'
+                            ]);
                             
                         }
                     }
 
-                    $get_selected_addons = SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->get();
-                    foreach($get_selected_addons as $key => $item){
-                        SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->update([
-                            'payment_status' => 'success'
-                        ]);
-                    }
+                    // $get_selected_addons = SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->get();
+                    // foreach($get_selected_addons as $key => $item){
+                    //     SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->update([
+                    //         'order_id' => 
+                    //         'payment_status' => 'success'
+                    //     ]);
+                    // }
 
 
 

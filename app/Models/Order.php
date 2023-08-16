@@ -30,4 +30,8 @@ class Order extends Model
     public function assignSubject(){
         return $this->hasMany(CartOrOrderAssignSubject::class,'order_id','id');
     }
+
+    public function selectedAddons(){
+        return $this->hasMany('App\Models\SelectedAddon');
+    }
 }
