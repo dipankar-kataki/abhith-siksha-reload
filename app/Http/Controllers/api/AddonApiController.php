@@ -11,12 +11,12 @@ class AddonApiController extends Controller
 {
     public function getClassRelatedAddons(Request $request){
 
-        $validator = Validator::make($request->all(), [
-            'class_id' => 'required'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'class_id' => 'required'
+        // ]);
 
-        if($validator->fails()){
-            return response()->json(['error' => $validator->errors()->first()], 400);
+        if($_GET['class_id'] != null ){
+            return response()->json(['error' => 'Class Id is required.'], 400);
         }else{
             try{
                 $get_addons =  Addon::where('class_id', $request->class_id)->where('status', 1)->get();
