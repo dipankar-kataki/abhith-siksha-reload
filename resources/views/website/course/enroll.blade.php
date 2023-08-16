@@ -632,6 +632,8 @@ input.largerCheckbox {
       if( (count==0) && (addon_count == 0)  ){
         box.style.display = 'none';
         buynow.style.display='none';
+      }else if((count > 0) && (addon_count > 0)){
+        box.style.display = 'none';
       }else{
         if(( count == 0) && (!(addon_count == 0))){
             alert('Oops! Select at least one subject to proceed further.');
