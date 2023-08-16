@@ -12,4 +12,9 @@ class SelectedAddon extends Model
 
     protected $table ='selected_addons';
     protected $guarded = [];
+
+
+    public function selectedAddon(){
+        return $this->belongsTo(Addon::class, 'addon_id', 'id');
+    }
 }

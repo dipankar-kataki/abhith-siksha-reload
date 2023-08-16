@@ -5,7 +5,7 @@
             <img src="{{asset($subject->subject->image)}}" alt="" width="60" height="50">
         </div>
         <div class="subjectName">
-            <h4>{{$subject->subject->subject_name}}</h4>
+            <h5>{{$subject->subject->subject_name}}</h5>
             <p> {{$subject->subject->lesson->count()}} Lessons</p>
             <a href="{{route('website.subject.detatils',Crypt::encrypt($subject->subject->id))}}">View</a>
         </div>
@@ -15,6 +15,26 @@
     </div>
 </div>
 @endif
+{{-- @foreach ($subject->assignSubject as $item)
+    @if(subjectStatus($item->subject->id)==3)
+    <div class="cart-course-description d-flex justify-content-between">
+        <div class="subject-div d-flex">
+            <div class="subject-img mr-3">
+                <img src="{{asset($item->subject->image)}}" alt="" width="60" height="50">
+            </div>
+            <div class="subjectName">
+                <h4>{{$item->subject->subject_name}}</h4>
+                <p> {{$item->subject->lesson->count()}} Lessons</p>
+                <a href="{{route('website.subject.detatils',Crypt::encrypt($item->subject->id))}}">View</a>
+            </div>
+        </div>
+        <div class="price-div">
+            <p><i class="fa fa-inr mr-2" aria-hidden="true"></i>{{$item->subject->subject_amount}}</p>
+        </div>
+    </div>
+    @endif
+@endforeach --}}
+
 {{-- <div class="col-lg-4">
     <h6> Course Type:
         @if($item->is_full_course_selected==1)Full Course

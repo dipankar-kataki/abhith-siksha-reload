@@ -4,6 +4,7 @@ namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Addon;
+use App\Models\SelectedAddon;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Chapter;
@@ -103,12 +104,19 @@ class CartController extends Controller
 
                 /**********************  For Selected Addons *******************/
 
-                $total_addons_amount = 0;
-
                 if( ($request->is_addons_selected == 1) && (!($request->addons == null)) ){
                     $get_addons = Addon::whereIn('id', $request->addons)->get();
-                    foreach($get_addons as $key => $item){
-                        $total_addons_amount += $item->price;
+                    foreach($get_addons as $key => $addon){
+                        $data = [
+                            'cart_id' => $cart->id,
+                            'addon_id' => $addon->id,
+                            'payment_status' => 'pending'
+                        ];
+
+                        $check_if_addon_already_selected = SelectedAddon::where('cart_id', $cart->id)->where('addon_id', $addon->id)->where('payment_status', 'pending')->exists();
+                        if(!$check_if_addon_already_selected){
+                            SelectedAddon::create($data);
+                        } 
                     }
                 }
                 
@@ -118,6 +126,8 @@ class CartController extends Controller
 
                 $user_detail = UserDetails::where('user_id', Auth::user()->id)->first();
                 $total_amount = totalAmountCart($cart->id);
+
+                $get_selected_addons = SelectedAddon::with('selectedAddon')->where('cart_id', $cart->id)->where('payment_status', 'pending')->get();
 
                 
 
@@ -158,8 +168,9 @@ class CartController extends Controller
                     'order_no' => orderNo()
 
                 ]);
-                return view('website.cart.checkout')->with(['cart' => $cart, 'countPrice' => $total_amount, 'checkoutParam' => $checkout_params]);
+                return view('website.cart.checkout')->with(['cart' => $cart, 'get_selected_addons' => $get_selected_addons, 'countPrice' => $total_amount, 'checkoutParam' => $checkout_params]);
             }
+
             $cart = Cart::with('assignSubject')->where([['user_id', '=', Auth::user()->id], ['assign_class_id', '=', $class_id], ['board_id', '=', $board_id], ['is_paid', '=', 0], ['is_remove_from_cart', '=', 0], ['is_full_course_selected', '=', $course_type], ['is_buy', '=', $request->buynow]])->first();
             
             if ($cart) {

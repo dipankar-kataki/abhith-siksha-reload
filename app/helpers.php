@@ -5,6 +5,7 @@ use App\Models\Cart;
 use App\Models\Lesson;
 use App\Models\LessonAttachment;
 use App\Models\Order;
+use App\Models\SelectedAddon;
 use App\Models\SubjectLessonVisitor;
 use App\Models\User;
 use App\Models\UserDetails;
@@ -440,19 +441,35 @@ function subjectStatus($subject_id)
 }
 function totalAmountCart($cart_id)
 {
+    try{
+        $cart = Cart::with('board', 'assignClass', 'assignSubject')->where('id', $cart_id)->first();
 
-    $cart = Cart::with('board', 'assignClass', 'assignSubject')->where('id', $cart_id)->first();
-    $all_subjects = $cart->assignSubject;
+   
 
-    $total = 0;
-
-    foreach ($all_subjects as $key => $all_subject) {
-
-        if (subjectStatus($all_subject->assign_subject_id) == 3) {
-            $total = $total + $all_subject->amount;
+        $all_subjects = $cart->assignSubject;
+    
+        $total = 0;
+    
+        foreach ($all_subjects as $key => $all_subject) {
+    
+            if (subjectStatus($all_subject->assign_subject_id) == 3) {
+                $total = $total + $all_subject->amount;
+            }
         }
+    
+        $addon = SelectedAddon::with('selectedAddon')->where('cart_id', $cart_id)->get();
+
+        foreach($addon as $key => $item){
+            $total = $total + $item->selectedAddon->price;
+        }
+
+
+        return $total;
+    }catch(\Exception $e){
+        echo 'Oops! Something Went Wrong';
     }
-    return $total;
+
+    
 }
 function totalCartItem()
 {

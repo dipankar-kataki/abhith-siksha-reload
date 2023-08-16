@@ -24,6 +24,28 @@
                             @empty
                                 <h4 class="text-center">Cart empty !</h4>
                             @endforelse
+
+                            @forelse ($get_selected_addons as $item)
+                                <div class="cart-course-description d-flex justify-content-between align-items-center">
+                                    <div class="subject-div d-flex align-items-center">
+                                        <div class="subject-img mr-3">
+                                            @if ($item->selectedAddon->type == 'pdf')
+                                                <img src="{{asset('asset_website/img/pdf-icon.png')}}" alt="pdf-icon" style="object-fit:contain;height:80px;width:80px;">
+                                            @else
+                                                <img src="{{asset($item->selectedAddon->file_path)}}" alt="addon image" style="object-fit:contain;height:80px;width:80px;">
+                                            @endif
+                                        </div>
+                                        <div class="subjectName">
+                                            <h5>{{$item->selectedAddon->name}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="price-div">
+                                        <p><i class="fa fa-inr mr-2" aria-hidden="true"></i>{{$item->selectedAddon->price}}</p>
+                                    </div>
+                                </div>
+                            @empty
+                                
+                            @endforelse
                         </ul>
                     </div>
                     <div class="total1">

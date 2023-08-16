@@ -31,4 +31,8 @@ class Cart extends Model
     public function assignSubject(){
         return $this->hasMany(CartOrOrderAssignSubject::class,'cart_id','id')->where('type',1);
     }
+
+    public function addons(){
+        return $this->hasMany(SelectedAddon::class, 'cart_id', 'id');
+    }
 }

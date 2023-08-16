@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
+use App\Models\SelectedAddon;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Chapter;
@@ -115,6 +116,15 @@ class PaymentController extends Controller
                             
                         }
                     }
+
+                    $get_selected_addons = SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->get();
+                    foreach($get_selected_addons as $key => $item){
+                        SelectedAddon::where('cart_id', $request->cart_id)->where('payment_status', 'pending')->update([
+                            'payment_status' => 'success'
+                        ]);
+                    }
+
+
 
                     Toastr::success('Payment Done Successfully.', '', ["positionClass" => "toast-top-right"]);
                     return redirect()->route('website.cart')->with('success', 'Payment Successfull!');
