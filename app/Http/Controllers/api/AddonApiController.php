@@ -19,13 +19,19 @@ class AddonApiController extends Controller
             return response()->json(['error' => 'Class Id is required.'], 400);
         }else{
             try{
-                $get_addons =  Addon::where('class_id', $request->class_id)->where('status', 1)->get();
-                $data = [
-                    "code" => 200,
-                    "message" => "Addons fetched successfully.",
-                    "addons" => $get_addons
-                ];
-                return response()->json(['status' => 1, 'result' => $data]);
+                $check_addon_class_exists = Addon::where('class_id', $request->class_id)->exists();
+                if(!$check_addon_class_exists){
+                    return response()->json(['error' => 'Addons not found.'], 400);
+                }else{
+                    $get_addons =  Addon::where('class_id', $request->class_id)->where('status', 1)->get();
+                    $data = [
+                        "code" => 200,
+                        "message" => "Addons fetched successfully.",
+                        "addons" => $get_addons
+                    ];
+                    return response()->json(['status' => 1, 'result' => $data]);
+                }
+                
             }catch(\Exception $e){
                 $data = [
                     "code" => 500,
