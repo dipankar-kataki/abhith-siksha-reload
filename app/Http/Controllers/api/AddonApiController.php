@@ -17,7 +17,7 @@ class AddonApiController extends Controller
         // ]);
 
         if( ($_GET['class'] == null) || ($_GET['board_id']== null) ){
-            return response()->json(['error' => 'Class Id is required.'], 400);
+            return response()->json(['error' => 'Required Parameters missing.'], 400);
         }else{
             try{
                 $check_class_exists = AssignClass::where('class', $request->class)->where('board_id', $request->board_id)->first();
