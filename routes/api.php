@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\BoardController;
 use App\Http\Controllers\api\AccountController;
+use App\Http\Controllers\api\AddonApiController;
 use App\Http\Controllers\api\BannerController;
 use App\Http\Controllers\api\BlogController;
 use App\Http\Controllers\api\CartController;
@@ -122,6 +123,11 @@ Route::group(['prefix' => 'blog', 'middleware' => ['auth:sanctum']], function ()
     Route::get('/', [BlogController::class, 'index']);
     
 });
+
+Route::group(['prefix' => 'addon', 'middleware' => ['auth:sanctum'] ], function() {
+    Route::get('get', [AddonApiController::class, 'getClassRelatedAddons']);
+});
+
 Route::post('/upload-note', [GalleryController::class, 'testapi']);
 Route::group(['prefix' => 'user'], function () {
     Route::POST('/sendotp', [UserController::class, 'sendOtpForgotPassword']);
