@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Addon;
+use App\Models\AssignClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,15 +16,15 @@ class AddonApiController extends Controller
         //     'class_id' => 'required'
         // ]);
 
-        if($_GET['class_id'] == null ){
+        if( ($_GET['class'] == null) && ($_GET['board_id']== null) ){
             return response()->json(['error' => 'Class Id is required.'], 400);
         }else{
             try{
-                $check_addon_class_exists = Addon::where('class_id', $request->class_id)->exists();
-                if(!$check_addon_class_exists){
+                $check_class_exists = AssignClass::where('class', $request->class)->where('board_id', $request->board_id)->first();
+                if($check_class_exists == null){
                     return response()->json(['error' => 'Addons not found.'], 400);
                 }else{
-                    $get_addons =  Addon::where('class_id', $request->class_id)->where('status', 1)->get();
+                    $get_addons =  Addon::where('class_id', $check_class_exists->id)->where('status', 1)->get();
                     $data = [
                         "code" => 200,
                         "message" => "Addons fetched successfully.",
