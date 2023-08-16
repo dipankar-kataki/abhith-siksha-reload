@@ -133,40 +133,41 @@
 
                 formData.append('boardId', boardId);
                 formData.append('classId', classId);
+                
+                console.log('classId ==>', classId);
 
+                // $.ajax({
+                //     url:"{{route('admin.create.addon')}}",
+                //     type:"POST",
+                //     contentType:false,
+                //     processData:false,
+                //     data:formData,
+                //     success:function(response){
+                //         if(response.status === 1){
 
-                $.ajax({
-                    url:"{{route('admin.create.addon')}}",
-                    type:"POST",
-                    contentType:false,
-                    processData:false,
-                    data:formData,
-                    success:function(response){
-                        if(response.status === 1){
+                //             Swal.fire({
+                //                 icon:'success',
+                //                 text:response.message
+                //             });
 
-                            Swal.fire({
-                                icon:'success',
-                                text:response.message
-                            });
+                //             $('#createAddonForm')[0].reset();
+                //             $('#createAddonBtn').attr('disabled', false);
+                //             $('#createAddonBtn').text('Submit');
+                //         }else{
 
-                            $('#createAddonForm')[0].reset();
-                            $('#createAddonBtn').attr('disabled', false);
-                            $('#createAddonBtn').text('Submit');
-                        }else{
-
-                            Swal.fire({
-                                icon:'error',
-                                text:response.message
-                            });
-                            $('#createAddonBtn').attr('disabled', false);
-                            $('#createAddonBtn').text('Submit');
-                        }
-                    },
-                    error:function(xhr, status, error){
-                        $('#createAddonBtn').attr('disabled', false);
-                        $('#createAddonBtn').text('Submit');
-                    }
-                });
+                //             Swal.fire({
+                //                 icon:'error',
+                //                 text:response.message
+                //             });
+                //             $('#createAddonBtn').attr('disabled', false);
+                //             $('#createAddonBtn').text('Submit');
+                //         }
+                //     },
+                //     error:function(xhr, status, error){
+                //         $('#createAddonBtn').attr('disabled', false);
+                //         $('#createAddonBtn').text('Submit');
+                //     }
+                // });
             }
         });
 
