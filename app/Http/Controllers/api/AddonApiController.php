@@ -16,7 +16,7 @@ class AddonApiController extends Controller
         //     'class_id' => 'required'
         // ]);
 
-        if( ($_GET['class'] == null) && ($_GET['board_id']== null) ){
+        if( ($_GET['class'] == null) || ($_GET['board_id']== null) ){
             return response()->json(['error' => 'Class Id is required.'], 400);
         }else{
             try{
