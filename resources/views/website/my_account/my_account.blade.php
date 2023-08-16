@@ -336,83 +336,34 @@
                         <div class="row">
                             <div class="col-lg-12 col-6">
                                 <h4 class="font-weight-bold">My Addons</h4>
-                                {{-- <h4 class="small-heading-black">My Courses</h4> --}}
                             </div>
                             <div class="col-lg-12 mt-4">
-                                {{-- <table id="addons_purchase_table" class="table table-striped">
+                                <table id="addons_table" class="table table-striped">
                                     <tbody>
-                                        @forelse ($purchase_history as $key => $item)
-                                        <div class="row mb-4">
-                                            <div class="col-lg-2 col-md-3">
-                                                @if ($item->board->logo == '')
-                                                <img src="{{ asset('asset_website/img/Image.png') }}"
-                                                    style="width:100%; aspect-ratio: 1/1; object-fit:cover; border-radius:10px"
-                                                    alt="">
+                                        @forelse ($get_addons as $key => $item)
+                                        <tr class="text-center">
+                                            {{-- <td>{{$key + 1}}</td> --}}
+                                            <td>{{ $item->selectedAddon->boards->exam_board }} - Class {{ $item->selectedAddon->assignClass->class }}
+                                            </td>
+                                            <td style="text-align: left">{{$item->selectedAddon->name}}</td>
+                                            <td>
+                                                {{$item->selectedAddon->type}}
+                                            </td>
 
-                                                @else
-                                                <img src="{{ asset($item->board->logo) }}"
-                                                    style="width:100%; aspect-ratio: 1/1; object-fit:cover; border-radius:10px"
-                                                    alt="">
-
-                                                @endif
-                                            </div>
-                                            <div class="col-lg-10 col-md-9">
-                                                <div class="d-flex justify-content-between myCourses-details">
-                                                    <div style="width: 25%; display:flex; flex-direction: column">
-                                                        <h6>Board</h6>
-                                                        <h5 class="font-weight-bold">
-                                                            {{ $item->board->exam_board }}</h5>
-
-                                                        <div class="myCourses-view-btn">
-                                                            <a href="{{ route('website.user.courses', Crypt::encrypt($item->id)) }}"
-                                                                target="_blank" class="btn-sm btn-primary">View
-                                                                Details</a>
-                                                        </div>
-                                                    </div>
-                                                    <div style="width: 25%">
-                                                        <h6>Class</h6>
-                                                        <h5 class="font-weight-bold">
-                                                            {{ $item->assignClass->class ?? '' }}
-                                                        </h5>
-                                                    </div>
-                                                    <div style="width: 25%">
-                                                        <h6>Course Type</h6>
-                                                        <h5 class="font-weight-bold">
-                                                            @if ($item->is_full_course_selected == 1)
-                                                            Full Course
-                                                            @else
-                                                            Custom package
-                                                            @endif
-                                                        </h5>
-                                                    </div>
-                                                    <div style="width: 25%">
-                                                        <h6>Total Subject(s)</h6>
-                                                        <h5 class="font-weight-bold">
-                                                            @foreach($item->assignSubject as $key=>$subject)
-                                                            <a
-                                                                href="{{route('website.subject.detatils',Crypt::encrypt( $subject->subject->id))}}">{{$key+1}}.
-                                                                {{ $subject->subject->subject_name }}</a><br>
-                                                            @endforeach
-
-                                                        </h5>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
+                                            <td>
+                                                <a href="{{asset($item->selectedAddon->file_path)}}" target="_blank">Click To View</a>
+                                            </td>
+                                            <td>{{ $item->updated_at->format('d-M-Y') }}</td>
+                                        </tr>
                                         @empty
                                         <tr>
                                             <div class="text-center">
-                                                <p>Oops !! No Courses Purchased yet !!</p>
-                                                <div class="shipping-div text-center"><a
-                                                        href="{{ route('website.course') }}"
-                                                        class="shipping-btn">Continue Enrolling</a></div>
+                                                <p>Oops! No Addons purchased yet.</p>
                                             </div>
                                         </tr>
                                         @endforelse
                                     </tbody>
-                                </table> --}}
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -625,11 +576,7 @@
                                         @empty
                                         <tr>
                                             <div class="text-center">
-                                                <p>Oops! No Courses purchased yet.</p>
-                                                <div class="shipping-div text-center"><a
-                                                        href="{{ route('website.course') }}"
-                                                        class="shipping-btn">Continue
-                                                        Enrolling</a></div>
+                                                <p>Oops! No Addons purchased yet.</p>
                                             </div>
                                         </tr>
                                         @endforelse
