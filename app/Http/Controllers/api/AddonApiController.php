@@ -48,7 +48,13 @@ class AddonApiController extends Controller
     public function getSelectedAddon(){
         try{
 
-            $get_selected_addon = SelectedAddon::where('user_id', auth()->user()->id)->where('payment_status', 'paid')->get();
+            $get_selected_addon = SelectedAddon::with('selectedAddon')->where('user_id', auth()->user()->id)->where('payment_status', 'paid')->get();
+            $details = [];
+
+            // foreach($get_selected_addon->selectedAddon as $key => $item){
+
+            // }
+
             $data = [
                 "code" => 200,
                 "message" => "Addons fetched successfully.",
