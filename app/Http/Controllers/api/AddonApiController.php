@@ -58,7 +58,7 @@ class AddonApiController extends Controller
             $data = [
                 "code" => 200,
                 "message" => "Addons fetched successfully.",
-                "selected_addons" => $get_selected_addon
+                "details" => $get_selected_addon
             ];
             return response()->json(['status' => 1, 'result' => $data]);
         }catch(\Exception $e){
