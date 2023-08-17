@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\SelectedAddon;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
@@ -92,8 +93,16 @@ class PaymentController extends Controller
             foreach ($cart_assign_subjects as $key => $cart_assign_subject) {
 
                 $cart_assign_subject_update = $cart_assign_subject->update(['order_id' => $order->id]);
+
+                SelectedAddon::where('user_id', auth()->user()->id)->where('cart_id', $request->cart_id)->where('payment_status', 'pending')->update([
+                    'order_id' =>   $order->id,
+                    'payment_status' => 'paid'
+                ]);
             }
             $cart_update = $cart->update(['is_paid' => 1, 'is_remove_from_cart' => 1]);
+
+            
+
             $data = [
                 "code" => 200,
                 "status" => 1,

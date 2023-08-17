@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Addon;
 use App\Models\AssignSubject;
 use App\Models\Cart;
 use App\Models\CartOrOrderAssignSubject;
+use App\Models\SelectedAddon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,11 +80,13 @@ class CartController extends Controller
                 ];
                 return response()->json(['status' => 0, 'result' => $data]);
             }
+
             $subject = AssignSubject::find($all_subjects[0]);
             $board_id = $subject->board_id;
             $class_id = $subject->assign_class_id;
             $course_type = $request->course_type;
             $isBuy = $request->is_buy;
+
             // $already_in_cart = Cart::where('user_id', auth()->user()->id)->where('board_id', $board_id)->where('assign_class_id', $class_id)->where('is_full_course_selected', 1)->get();
             // // if ($already_in_cart->count() > 0) {
             // //     $data = [
@@ -143,6 +147,29 @@ class CartController extends Controller
             } else {
                 $message = "Subjects was successfully added to your cart";
             }
+
+
+            //Start For Storing Selected Addons ----------------
+
+            if( $request->addons != null ){
+                $get_addons = Addon::whereIn('id', $request->addons)->get();
+                foreach($get_addons as $key => $addon){
+                    $data = [
+                        'user_id' => auth()->user()->id,
+                        'cart_id' => $cart->id,
+                        'addon_id' => $addon->id,
+                        'payment_status' => 'pending'
+                    ];
+
+                    $check_if_addon_already_selected = SelectedAddon::where('user_id', auth()->user()->id)->where('cart_id', $cart->id)->where('addon_id', $addon->id)->where('payment_status', 'pending')->exists();
+                    if(!$check_if_addon_already_selected){
+                        SelectedAddon::create($data);
+                    } 
+                }
+            }
+            
+            // End For Storing Selected Addons ----------------
+
             $data = [
                 "code" => 200,
                 "status" => 1,
