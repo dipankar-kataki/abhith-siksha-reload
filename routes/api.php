@@ -126,6 +126,7 @@ Route::group(['prefix' => 'blog', 'middleware' => ['auth:sanctum']], function ()
 
 Route::group(['prefix' => 'addon', 'middleware' => ['auth:sanctum'] ], function() {
     Route::get('get', [AddonApiController::class, 'getClassRelatedAddons']);
+    Route::get('get-selected', [AddonApiController::class, 'getSelectedAddon']);
 });
 
 Route::post('/upload-note', [GalleryController::class, 'testapi']);

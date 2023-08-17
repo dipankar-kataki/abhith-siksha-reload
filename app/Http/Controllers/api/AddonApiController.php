@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Addon;
 use App\Models\AssignClass;
+use App\Models\SelectedAddon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,6 +42,26 @@ class AddonApiController extends Controller
     
                 return response()->json(['status' => 0, 'result' => $data]);
             }
+        }
+    }
+
+    public function getSelectedAddon(){
+        try{
+
+            $get_selected_addon = SelectedAddon::where('user_id', auth()->user()->id)->where('payment_status', 'paid')->get();
+            $data = [
+                "code" => 200,
+                "message" => "Addons fetched successfully.",
+                "selected_addons" => $get_selected_addon
+            ];
+            return response()->json(['status' => 1, 'result' => $data]);
+        }catch(\Exception $e){
+            $data = [
+                "code" => 500,
+                "message" => "Something went wrong.",
+            ];
+
+            return response()->json(['status' => 0, 'result' => $data]);
         }
     }
 }
