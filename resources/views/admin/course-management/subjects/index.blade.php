@@ -116,8 +116,8 @@
                                             <button class="btn btn-sm assignTeacherModal actionBtn"
                                                 data-id="{{ Crypt::encrypt($subject->id) }}" title="Assign Teacher"><i
                                                     class="mdi mdi-account-check"></i></button>
-                                            <a href="{{ route('admin.course.management.subject.edit', Crypt::encrypt($subject->id)) }}"
-                                                title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
+                                            {{-- <a href="{{ route('admin.course.management.subject.edit', Crypt::encrypt($subject->id)) }}"
+                                                title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a> --}}
                                             <a href="{{ route('admin.course.management.subject.view', Crypt::encrypt($subject->id)) }}"
                                                 title="View Details"><i class="mdi mdi-eye"></i></a>
                                         </td>
