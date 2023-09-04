@@ -46,7 +46,7 @@
                 <div class="file-select">
                     <div class="file-select-button" id="fileName">Choose File</div>
                     <div class="file-select-name" id="noCoverImage">No file chosen...</div>
-                    @if ( (isset($subject))  && ($subject->subjectAttachment->img_url))
+                    @if ( $subject->subjectAttachment->img_url != null)
                         <input type="file" id='imageUpload' name="image_url" accept=".jpg, .jpeg, .png,.tif, .tiff"
                         value="{{asset($subject->subjectAttachment->img_url)}}">
                     @else
