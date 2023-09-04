@@ -46,8 +46,15 @@
                 <div class="file-select">
                     <div class="file-select-button" id="fileName">Choose File</div>
                     <div class="file-select-name" id="noCoverImage">No file chosen...</div>
-                    <input type="file" id='imageUpload' name="image_url" accept=".jpg, .jpeg, .png,.tif, .tiff"
-                        value="@if(isset($subject)){{asset($subject->subjectAttachment->img_url)}} @else {{asset('files/subject/placeholder.jpg')}} @endif">
+                    @if ( (isset($subject))  && ($subject->subjectAttachment->img_url))
+                        <input type="file" id='imageUpload' name="image_url" accept=".jpg, .jpeg, .png,.tif, .tiff"
+                        value="{{asset($subject->subjectAttachment->img_url)}}">
+                    @else
+                        <input type="file" id='imageUpload' name="image_url" accept=".jpg, .jpeg, .png,.tif, .tiff"
+                        value="{{asset('files/subject/placeholder.jpg')}}">
+                    @endif
+                    {{-- <input type="file" id='imageUpload' name="image_url" accept=".jpg, .jpeg, .png,.tif, .tiff"
+                        value="@if(isset($subject)){{asset($subject->subjectAttachment->img_url)}} @else {{asset('files/subject/placeholder.jpg')}} @endif"> --}}
                 </div>
             </div>
             <span id="imageUrlError"></span>
