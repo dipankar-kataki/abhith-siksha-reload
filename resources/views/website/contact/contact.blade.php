@@ -54,7 +54,18 @@
                     </div>
                     <div>
                         <h4 data-brackets-id="12020" class="small-heading-black mb20">Our Numbers</h4>
-                        <p class="mb0">+91-96780-83808</p>
+                        <p class="mb0">
+                            <span style="font-weight:600;">Email</span>:- 
+                            <span style="font-weight: 800;">support@abhithsiksha.com</span>
+                        </p>
+                        <p class="mb0">
+                            <span style="font-weight:600;">Contact Number</span>:- 
+                            <span style="font-weight: 800;">+91-96780-83808</span></p>
+                        <p class="mb0">
+                            <span style="font-weight:600;">Address</span>:-  
+                            <span style="font-weight: 800;">16/34 F.C. Road, Uzanbazar, Guwahati-1
+                            Near Income Tax Office, Assam, India</span>
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-6">
