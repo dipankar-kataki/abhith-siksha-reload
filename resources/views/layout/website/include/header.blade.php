@@ -16,8 +16,8 @@
             <div class="col-lg-3 col-8 header-text">HELPING CREATE SUCCESS</div>
             <div class="col-lg-3 col-3">
                 <ul class="list-inline header-social  mb0">
-                    <li><a href="https://www.facebook.com/abhithsiksha"><span class="icon-facebook-07 header-social-icon"></span></a></li>
-                    <li><a href="https://www.linkedin.com/company/abhith-siksha/"><span class="icon-linkdin-07 header-social-icon"></span></a></li>
+                    <li><a href="https://www.facebook.com/abhithsiksha" target="_blank"><span class="icon-facebook-07 header-social-icon"></span></a></li>
+                    <li><a href="https://www.linkedin.com/company/abhith-siksha/" target="_blank"><span class="icon-linkdin-07 header-social-icon"></span></a></li>
                     {{-- <li><a href="#"><span class="icon-twitter-07 header-social-icon"></span></a></li>
                     <li><a href="#"><span class="icon-instagram-07 header-social-icon"></span></a></li> --}}
                 </ul>
