@@ -338,18 +338,20 @@
 <section class="blogs">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-12">
                 <p class="cross-line4">
                     <span>BLOGS</span>
                 </p>
                 <h2 class="heading-black">Our Latest Blogs</h2>
-                <p>Aliquam a augue suscipit, luctus neque purus ipsum neque dolor primis
-                    libero tempus, blandit posuere and ligula varius magna a porta</p>
-            </div>
-            <div class="col-lg-6">
-                <div><a href="{{ route('website.blog') }}" target="_blank" class="view">Read More
+                {{-- <p>Aliquam a augue suscipit, luctus neque purus ipsum neque dolor primis
+                    libero tempus, blandit posuere and ligula varius magna a porta</p> --}}
+                    <div><a href="{{ route('website.blog') }}" target="_blank" class="view">Read More
                         Stories</a></div>
             </div>
+            {{-- <div class="col-lg-6">
+                <div><a href="{{ route('website.blog') }}" target="_blank" class="view">Read More
+                        Stories</a></div>
+            </div> --}}
             <div class="col-lg-12">
                 <ul class="list-inline blog-list">
                     @foreach ($blogs as $item)
