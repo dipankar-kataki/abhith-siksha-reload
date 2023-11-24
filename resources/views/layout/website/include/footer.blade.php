@@ -14,10 +14,10 @@
             </div>
             <div class="col-lg-9 col-6 p0">
                 <ul class="list-inline social-media mb0">
-                    <li><a href="#"><span class="icon-facebook-07"></span></a></li>
-                    <li><a href="#"><span class="icon-linkdin-07"></span></a></li>
-                    <li><a href="#"><span class="icon-twitter-07"></span></a></li>
-                    <li><a href="#"><span class="icon-instagram-07"></span></a></li>
+                    <li><a href="https://www.facebook.com/abhithsiksha" target="_blank"><span class="icon-facebook-07"></span></a></li>
+                    <li><a href="https://www.facebook.com/abhithsiksha" target="_blank"><span class="icon-linkdin-07"></span></a></li>
+                    {{-- <li><a href="#"><span class="icon-twitter-07"></span></a></li>
+                    <li><a href="#"><span class="icon-instagram-07"></span></a></li> --}}
                 </ul>
             </div>
         </div>

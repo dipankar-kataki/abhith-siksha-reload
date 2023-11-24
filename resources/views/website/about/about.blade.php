@@ -107,7 +107,7 @@
                         </p>
                         <p class="about-content">Abhith Siksha is an amalgamation of immensely talented teachers and aspiring learners under
                             one roof, thus providing an environment for an individual to grow leaps and bounds. </p>
-                        <div id="projectFacts">
+                        {{-- <div id="projectFacts">
                             <div class="">
                                 <div class="projectFactsWrap ">
                                     <div class="item" data-number="12">
@@ -130,7 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </li>
                 </ul>
             </div>
