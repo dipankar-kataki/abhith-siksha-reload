@@ -72,7 +72,7 @@
                 </ul>
             </div>
             <div class="col-lg-5 p0 footer-mid-right">
-                <p class="mb0">&copy; 2021 Abhith Sikhsha, All Rights Reserved</p>
+                <p class="mb0">&copy; <?php echo date('Y'); ?> Abhith Sikhsha, All Rights Reserved</p>
             </div>
         </div>
     </div>
