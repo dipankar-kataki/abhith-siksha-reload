@@ -145,21 +145,21 @@ function otpSend($phone, $otp)
     $errorMessage = true;
 
     //Your message to send, Adding URL encoding.
-    $message = urlencode("<#> Use $otp as your verification code. The OTP expires within 10 mins. Do not share it with anyone. -regards Abhith Siksha");
+    $message = urlencode("Your verification code is $otp. Please enter this code to verify your mobile number. Do not share this code with anyone. Thank you for choosing Abhith Siksha.");
 
 
     //Preparing post parameters
     $postData = array(
-        'authkey' => '19403ARfxb6xCGLJ619221c6P15',
+        'authkey' => '3633626869746839393095',
         'mobiles' => $phone,
         'message' => $message,
-        'sender' => 'ABHSKH',
-        'DLT_TE_ID' => 1207164006513329391,
-        'route' => 4,
+        'sender' => 'ABHSIK',
+        'DLT_TE_ID' => 1207170229860442321	,
+        'route' => 2,
         'response' => 'json'
     );
 
-    $url = "http://login.yourbulksms.com/api/sendhttp.php";
+    $url = "http://control.yourbulksms.com/api/sendhttp.php";
 
     $ch = curl_init();
     curl_setopt_array($ch, array(
@@ -192,20 +192,20 @@ function otpSendForgotPassword($phone, $otp)
     $errorMessage = true;
 
     //Your message to send, Adding URL encoding.
-    $message = urlencode("<#> Use $otp as your verification code. The OTP expires within 10 mins. Do not share it with anyone. -regards Abhith Siksha");
+    $message = urlencode("Your verification code is $otp. Please enter this code to verify your mobile number. Do not share this code with anyone. Thank you for choosing Abhith Siksha.");
 
     //Preparing post parameters
     $postData = array(
-        'authkey' => '19403ARfxb6xCGLJ619221c6P15',
+        'authkey' => '3633626869746839393095',
         'mobiles' => $phone,
         'message' => $message,
-        'sender' => 'ABHSKH',
-        'DLT_TE_ID' => 1207164006513329391,
-        'route' => 4,
+        'sender' => 'ABHSIK',
+        'DLT_TE_ID' => 1207170229860442321,
+        'route' => 2,
         'response' => 'json'
     );
 
-    $url = "http://login.yourbulksms.com/api/sendhttp.php";
+    $url = "http://control.yourbulksms.com/api/sendhttp.php";
 
     $ch = curl_init();
     curl_setopt_array($ch, array(
