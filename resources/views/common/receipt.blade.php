@@ -78,7 +78,7 @@
             <tr>
                 <td>
                     {{-- <img src="{{asset('asset_website/img/home/logo_.png')}}" /> --}}
-                    <img src="https://abhithsiksha.com/abhith-siksha/public/asset_website/img/home/logo_.png" />
+                    <img src="https://abhithsiksha.com/asset_website/img/home/logo_.png" />
                 </td>
                 <td>
                     <p class="text-right heading">E-Receipt</p>

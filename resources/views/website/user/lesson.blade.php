@@ -81,15 +81,15 @@ $prefix = Request::route()->getPrefix();
             var lessons=result.result.all_lessons;
             demoVideoPlayer=`
             <video id="player" class="video-js vjs-big-play-centered" controls preload="auto"
-                    poster="https://abhithsiksha.com/abhith-siksha/public/${topic.lesson_attachment.video_thumbnail_image}" data-setup="{}">
-                    <source src="https://abhithsiksha.com/abhith-siksha/public/${topic.lesson_attachment.attachment_origin_url}" type="video/mp4"
+                    poster="https://abhithsiksha.com/${topic.lesson_attachment.video_thumbnail_image}" data-setup="{}">
+                    <source src="https://abhithsiksha.com/${topic.lesson_attachment.attachment_origin_url}" type="video/mp4"
                         class="w100" />
                 </video>`;
              
             lessons.forEach(function(lesson) {
               displayLessons += `
                                 <div class="lesson-video-content d-flex mx-1">
-                                  <p><div><img src="https://abhithsiksha.com/abhith-siksha/public/${lesson.lesson_attachment.video_thumbnail_image}" style="height:50px;width:70px;"></div><i class="fa fa-play-circle"></i> ${lesson.name} &nbsp;
+                                  <p><div><img src="https://abhithsiksha.com/${lesson.lesson_attachment.video_thumbnail_image}" style="height:50px;width:70px;"></div><i class="fa fa-play-circle"></i> ${lesson.name} &nbsp;
                                     
                                       ${lesson.lesson_attachment.video_duration} mins
                                        </p>       
