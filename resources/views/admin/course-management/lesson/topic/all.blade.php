@@ -94,7 +94,7 @@
                                     {{-- <td><a href="" title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
                                         <a href="" title="View Details"><i class="mdi mdi-eye"></i></a>
                                     </td> --}}
-                                    <td><a href="#" title="Delete Lesson"><i class="mdi mdi-trash"></i> Delete</a>
+                                    <td><a href="#" title="Delete PDF" class="badge badge-danger"><i class="mdi mdi-delete-forever"></i> Delete</a>
                                         {{-- <a href="" title="View Details"><i class="mdi mdi-eye"></i></a> --}}
                                     </td>
                                 </tr>
@@ -124,7 +124,7 @@
                             </thead>
                             <tbody>
                                 @php $videocount=1; @endphp
-                                @foreach($lesson->topics->where('type',2) as $key=>$topic)
+                                @foreach($lesson->topics->where('type',2) as $key => $topic)
                                 <tr>
                                     <td>{{$videocount++}}</td>
                                     <td> {{$topic->parentLesson->name}}</td>
@@ -171,7 +171,8 @@
                                         <a href="{{route('admin.lesson.status',Crypt::encrypt($topic->id))}}"
                                             class="badge badge-danger">InActive</a> @endif
                                     </td>
-                                    <td><a href="#" title="Delete Lesson" class="btn btn-xl btn-danger"><i class="mdi mdi-trash"></i> Delete</a>
+                                    <td><button type="button" title="Delete Video" class="badge badge-danger video-lesson-delete-btn" data-id={{$topic->id}}>
+                                        <i class="mdi mdi-delete-forever"></i> Delete</button>
                                         {{-- <a href="" title="View Details"><i class="mdi mdi-eye"></i></a> --}}
                                     </td>
                                     
@@ -227,6 +228,7 @@
                                     </td>
                                     <td><a href="{{route('admin.course.management.lesson.edit',Crypt::encrypt($topic->id))}}" title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
                                         <a href="{{route('admin.course.management.lesson.view',Crypt::encrypt($topic->id))}}" title="View Details"><i class="mdi mdi-eye"></i></a>
+                                        <a href="#" title="Delete Article" class="badge badge-danger"><i class="mdi mdi-delete-forever"></i> Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -261,7 +263,8 @@
                                     {{-- <td>@if($topic->status==1)Active @else InActive @endif</td> --}}
                                     <td>
                                         <a href="{{route('admin.view.mcq.question',Crypt::encrypt($set->id))}}"
-                                            title="View Details"><i class="mdi mdi-eye"></i></a>
+                                            title="View Details" class="my-4"><i class="mdi mdi-eye"></i></a>
+                                        <a href="#" title="Delete Prcatice Test" class="badge badge-danger"><i class="mdi mdi-delete-forever"></i>Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

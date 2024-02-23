@@ -334,4 +334,38 @@ function setFileInfo() {
     $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
     });
 </script>
+
+<script>
+    $('.video-lesson-delete-btn').on('click', function(){
+        const lesson_resource_id = $(this).data('id');
+        $.ajax({
+            url:"{{route('admin.course.management.lesson.delete.resource')}}",
+            type:"POST",
+            data:{
+               'lesson_resource_id' : lesson_resource_id,
+               '_token' : "{{csrf_token()}}" 
+            },
+            success:function(data){
+                if(data.status == 200){
+                    toastr.success(data.message, '', {
+                        positionClass: 'toast-top-right',
+                        timeOut: 3000
+                    });
+                    location.reload();
+                }else{
+                    toastr.error(data.message, '', {
+                        positionClass: 'toast-top-right',
+                        timeOut: 3000
+                    });
+                }
+            },error:function(error){
+                toastr.error(error, 'Error', {
+                    positionClass: 'toast-top-right',
+                    timeOut: 3000
+                });
+            }
+        });
+        console.log('Video Resource Id ==> ', lesson_resource_id)
+    });
+</script>
 @endsection

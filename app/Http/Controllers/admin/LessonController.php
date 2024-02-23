@@ -7,6 +7,7 @@ use App\Imports\QuestionImport;
 use App\Jobs\ConvertVideoForResolution;
 use App\Models\AssignSubject;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Board;
@@ -555,6 +556,45 @@ class LessonController extends Controller
         } catch (\Throwable $th) {
             //throw $th->getMessage();
             return response()->json(['message' => $th->getMessage(), 'status' => 2]);
+        }
+    }
+
+
+    public function deleteLessonResource(Request $request){
+        $lesson_resource_id = $request->lesson_resource_id;
+        DB::beginTransaction();
+        try{
+            $get_lesson_data = Lesson::where('id', $lesson_resource_id)->first();
+            $get_lesson_attachment_data = LessonAttachment::where('subject_lesson_id', $lesson_resource_id)->first();
+            $file_location = null;
+
+            if($get_lesson_attachment_data != null){
+                if($get_lesson_attachment_data->attachment_type == 1){
+                    $file_location = $get_lesson_attachment_data->img_url;
+                }else if($get_lesson_attachment_data->attachment_type == 2){
+                    $file_location = $get_lesson_attachment_data->video_origin_url;
+                }
+                if (Storage::disk('public')->exists($file_location)) {
+                    // Delete the file
+                    Storage::disk('public')->delete($file_location);
+
+                    $get_lesson_attachment_data->delete();
+                    $get_lesson_data->delete();
+
+                    return response()->json(['message' => 'Great! Asset deleted successfully', 'status' => 200]);
+                } else {
+                    // File does not exist
+                    return response()->json(['message' => 'Oops! Asset not found', 'status' => 404]);
+                }
+            }else{
+                $get_lesson_data->delete();
+            }
+
+            DB::commit();
+            return response()->json(['message' => 'Great! Asset deleted successfully', 'status' => 200]);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => 'Oops! Something went wrong'.$e->getMessage(), 'status' => 500]);
         }
     }
 }
