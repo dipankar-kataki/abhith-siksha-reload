@@ -45,6 +45,7 @@
                                     <th> Teacher </th>
                                     <th> Preview</th>
                                     <th> Status </th>
+                                    <th>Action</th>
                                     {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
@@ -93,6 +94,9 @@
                                     {{-- <td><a href="" title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
                                         <a href="" title="View Details"><i class="mdi mdi-eye"></i></a>
                                     </td> --}}
+                                    <td><a href="#" title="Delete Lesson"><i class="mdi mdi-trash"></i> Delete</a>
+                                        {{-- <a href="" title="View Details"><i class="mdi mdi-eye"></i></a> --}}
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -115,6 +119,7 @@
                                     <th> Video Duration </th>
                                     <th> Preview </th>
                                     <th> Status </th>
+                                    <th> Action </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -165,6 +170,9 @@
                                         @else
                                         <a href="{{route('admin.lesson.status',Crypt::encrypt($topic->id))}}"
                                             class="badge badge-danger">InActive</a> @endif
+                                    </td>
+                                    <td><a href="#" title="Delete Lesson" class="btn btn-xl btn-danger"><i class="mdi mdi-trash"></i> Delete</a>
+                                        {{-- <a href="" title="View Details"><i class="mdi mdi-eye"></i></a> --}}
                                     </td>
                                     
                                 </tr>
