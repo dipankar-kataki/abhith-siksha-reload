@@ -133,4 +133,14 @@ class BlogController extends Controller
 
         return response()->json(['status'=>1, 'message' => 'Blog edited successfully']);
     }
+
+    public function deleteBlog($id){
+        $blog_id = decrypt($id);
+        try{
+            Blog::where('id', $blog_id)->delete();
+            return back()->with(['success' => 'Great! Blog delted successfully']);
+        }catch(\Exception $e){
+            echo 'Oops! Something went wrong';
+        }
+    }
 }

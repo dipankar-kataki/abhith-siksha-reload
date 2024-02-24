@@ -23,4 +23,17 @@ class EnrolledController extends Controller
         $students=User::where('type_id',2)->where('verify_otp',1)->get();
         return view('admin.registerd.students')->with('students', $students);
     }
+
+    public function changeActiveStatus($id, $activation_status){
+        $student_id = decrypt($id);
+        $status = $activation_status;
+        try{
+            User::where('id', $student_id)->update([
+                'is_activate' => $status
+            ]);
+            return back()->with(['success' => 'Student activation status updated']);
+        }catch(\Exception $e){
+            echo 'Oops! Something went wrong';
+        }
+    }
 }

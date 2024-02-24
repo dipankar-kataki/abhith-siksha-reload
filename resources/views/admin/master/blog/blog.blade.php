@@ -46,7 +46,7 @@
 
                         <a href="{{ route('admin.edit.blog',['id'=>\Crypt::encrypt($item->id)]) }}"
                             class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3"
-                            data-toggle="tooltip" data-placement="top" title="Edit">
+                            data-toggle="tooltip" data-placement="top" title="Edit" style="margin-right:10px;">
                             <i class="mdi mdi-pencil-outline"></i>
                         </a>
                     </div>
@@ -78,10 +78,15 @@
                         </label>
                         @endif
 
+                        <a href="{{ route('admin.delete.blog',['id'=>\Crypt::encrypt($item->id)]) }}"
+                            class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3"  >
+                            <i class="mdi mdi-delete-sweep"></i>
+                        </a>
                         <a href="{{ route('admin.edit.blog',['id'=>\Crypt::encrypt($item->id)]) }}"
-                            class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3">
+                            class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3" style="margin-right:10px;">
                             <i class="mdi mdi-pencil-outline"></i>
                         </a>
+                        
                     </div>
 
                     <img src="{{ asset($item->blog_image) }}" width="100%" height="200" alt="" style="object-fit:cover">
@@ -140,4 +145,9 @@
         });
     });
 </script>
+@if (session('success'))
+    <script>
+        toastr.success('{!! session('success') !!}');
+    </script>
+@endif
 @endsection

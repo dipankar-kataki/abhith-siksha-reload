@@ -49,6 +49,7 @@
                             <th> Email </th>
                             <th> Phone number </th>
                             <th> Registration Date </th>
+                            <th>Action</th>
                         </tr>
 
                     </thead>
@@ -64,6 +65,14 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone ?? 'NA' }}</td>
                             <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
+                            <td>
+                                @if ($user->is_activate == 1)
+                                    <a href="{{route('admin.change.active.status', ['id' => encrypt($user->id), 'activation_status' => 0])}}" class="btn btn-sm btn-danger">Deactivate</a>
+                                @else
+                                    <a href="{{route('admin.change.active.status', ['id' => encrypt($user->id), 'activation_status' => 1])}}" class="btn btn-sm btn-success">Activate</a>
+                                @endif
+                                
+                            </td>
                         </tr>
                         @empty
                         <div class="text-center">
@@ -94,4 +103,9 @@
             });
         });
 </script>
+@if (session('success'))
+    <script>
+        toastr.success('{!! session('success') !!}');
+    </script>
+@endif
 @endsection

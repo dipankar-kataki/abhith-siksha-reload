@@ -190,6 +190,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', [BlogController::class, 'editBlog'])->name('admin.edit.blog');
             Route::post('editing', [BlogController::class, 'edit'])->name('admin.editing.blog');
             Route::get('view/{id}', [BlogController::class, 'viewBlog'])->name('admin.read.blog');
+            Route::get('delete/{id}', [BlogController::class, 'deleteBlog'])->name('admin.delete.blog');
         });
 
         /* ------------------------------- Gallery ------------------------------------ */
@@ -214,6 +215,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('all', [EnrolledController::class, 'getEnrolledStudents'])->name('admin.get.enrolled.students');
         Route::get('pending', [EnrolledController::class, 'getPendingStudents'])->name('admin.get.enrolled.pending');
         Route::get('students', [EnrolledController::class, 'getRegisterdStudents'])->name('admin.registered.students');
+        Route::get('change-active-status/{id}/{activation_status}', [EnrolledController::class, 'changeActiveStatus'])->name('admin.change.active.status');
     });
 
     /* ------------------------------- Enquiry ------------------------------------ */
