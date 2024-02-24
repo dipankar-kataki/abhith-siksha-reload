@@ -264,8 +264,8 @@
                                     {{-- <td>@if($topic->status==1)Active @else InActive @endif</td> --}}
                                     <td>
                                         <a href="{{route('admin.view.mcq.question',Crypt::encrypt($set->id))}}"
-                                            title="View Details" class="my-4"><i class="mdi mdi-eye"></i></a>
-                                        <a href="#" title="Delete Prcatice Test" class="badge badge-danger mcq-delete-button" data-id="{{$set->id}}">Delete</a>
+                                            title="View Details" class="my-4" style="margin-right:20px;"><i class="mdi mdi-eye"></i></a>
+                                        <a href="#" title="Delete Prcatice Test" class="badge badge-danger mcq-delete-button" data-id="{{$set->id}}" style="margin-right:20px;">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

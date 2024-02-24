@@ -73,6 +73,9 @@
                         <li @if (ifGalleryActive(Route::currentRouteName()) == true) class="nav-item active" @else class="nav-item" @endif> <a
                                 @if (ifGalleryActive(Route::currentRouteName()) == true) class="nav-link active" @else class="nav-link" @endif
                                 href="{{ route('admin.get.gallery') }}">Gallery</a></li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.change.homepage.media.link')}}" class="nav-link">Homepage Youtube Link</a>
+                        </li>
 
                     </ul>
                 </div>

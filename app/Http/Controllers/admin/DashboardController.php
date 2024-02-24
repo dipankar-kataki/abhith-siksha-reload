@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Board;
+use App\Models\HomepageMediaLink;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,5 +19,24 @@ class DashboardController extends Controller
     $total_teacher = User::where('type_id', 3)->where('verify_otp', 1)->get()->count();
   
     return view('admin.dashboard.dashboard', compact('boards','total_student','total_teacher'));
+  }
+
+  public function homepageMediaLink(Request $request){
+
+    if($request->isMethod('get')){
+      $media_link = HomepageMediaLink::where('type', 'YouTube')->first();
+      return view('admin.master.homepage-youtube-link.homepage-youtube-link')->with(['link' => $media_link->media_link]);
+    }else {
+      try{
+        $media_link = $request->media_link;
+        HomepageMediaLink::create([
+          'media_link' => $media_link,
+          'type' => 'YouTube'
+        ]);
+        return back()->with(['success' => 'Great! Link added successfully']);
+      }catch(\Exception $e){
+        echo 'Oops! Something went wrong';
+      }
+    }
   }
 }

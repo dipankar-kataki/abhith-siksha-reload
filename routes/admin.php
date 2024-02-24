@@ -202,6 +202,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('delete/{id}', [GalleryController::class, 'deleteGallery'])->name('admin.delete.gallery');
             Route::post('editing', [GalleryController::class, 'edit'])->name('admin.editing.gallery');
         });
+
+        Route::match(['get', 'post'],'homepage-media-link', [DashboardController::class, 'homepageMediaLink'])->name('admin.change.homepage.media.link');
     });
 
 

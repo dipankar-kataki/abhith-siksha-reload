@@ -179,14 +179,13 @@
                         selection of courses</h2>
                     <p>Choose from over 100,000 online video courses with
                         new additions published every month</p>
-                    <div class="mt-5"><a href="{{ route('website.course') }}" target="_blank" class="knowledge-link">View
+                    <div class="mt-5"><a href="{{ route('website.course') }}" target="_blank" class="knowledge-link mb-5">View
                             All
                             Coures</a>
                     </div>
                 </div>
-
-                <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/9HI8nN3xvn8"
+                <div class="col-lg-8 col-md-12 col-sm-12 mb-5">
+                    <iframe width="100%" height="100%" src={{$link ?? 'https://www.youtube.com/embed/6OUz0aK7buQ?si=hXfLivbMAcSTeAlN' }}
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen style="border-radius:10px"></iframe>
@@ -203,7 +202,7 @@
                                         <a href="{{ route('website.course.package.enroll.all', Crypt::encrypt($subject->id)) }}" class="enroll">Enroll Now</a>
                                     </div> -->
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                        <div class="course-pic">
+                        <div class="course-pic" style="border: 1px solid #f4f0f0;border-radius: 5px 5px 0px 0px;">
                             <img src="{{ asset($subject->image) }}" class="w100">
                             <div class="course-image-overlay">
                                 <a href="{{ route('website.subject.detatils', Crypt::encrypt($subject->id)) }}"

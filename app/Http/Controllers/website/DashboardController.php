@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
+use App\Models\HomepageMediaLink;
 use Illuminate\Http\Request;
 use App\Models\Banner;
 use App\Common\Activation;
@@ -23,6 +24,9 @@ class DashboardController extends Controller
         $banner = Banner::where('is_activate', Activation::Activate)->take(6)->orderBy('id', 'DESC')->get();
         $blogs = Blog::where('is_activate', Activation::Activate)->take(3)->orderBy('id', 'DESC')->get();
         $testimonial = Testimonial::latest()->limit(3)->get();
+
+        $media_link = HomepageMediaLink::where('type', 'YouTube')->first();
+        $link = $media_link->media_link;
         // $gallery = Gallery::where('is_activate',Activation::Activate)->take(4)->orderBy('id','DESC')-get();
         $publishCourse = [];
         $upComingCourse = [];
@@ -100,6 +104,6 @@ class DashboardController extends Controller
             }
         }
         // dd($publishCourse);
-        return view('website.home',compact('banner', 'blogs', 'testimonial', 'upComingCourse', 'publishCourse'));
+        return view('website.home',compact('banner', 'blogs', 'testimonial', 'upComingCourse', 'publishCourse', 'link'));
     }
 }
