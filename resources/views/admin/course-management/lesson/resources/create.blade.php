@@ -336,12 +336,12 @@ function setFileInfo() {
 </script>
 
 <script>
-    $('.video-lesson-delete-btn').on('click', function(){
+    $('.media-lesson-delete-btn').on('click', function(){
         const lesson_resource_id = $(this).data('id');
         $(this).attr('disabled', true)
         $(this).text('Please wait..')
         $.ajax({
-            url:"{{route('admin.course.management.lesson.delete.resource')}}",
+            url:"{{route('admin.course.management.lesson.delete.media.resource')}}",
             type:"POST",
             data:{
                'lesson_resource_id' : lesson_resource_id,
@@ -359,16 +359,16 @@ function setFileInfo() {
                         positionClass: 'toast-top-right',
                         timeOut: 3000
                     });
-                    $('.video-lesson-delete-btn').attr('disabled', true)
-                    $('.video-lesson-delete-btn').text('Delete')
+                    $('.media-lesson-delete-btn').attr('disabled', true)
+                    $('.media-lesson-delete-btn').text('Delete')
                 }
             },error:function(error){
                 toastr.error(error, 'Error', {
                     positionClass: 'toast-top-right',
                     timeOut: 3000
                 });
-                $('.video-lesson-delete-btn').attr('disabled', true)
-                $('.video-lesson-delete-btn').text('Delete')
+                $('.media-lesson-delete-btn').attr('disabled', true)
+                $('.media-lesson-delete-btn').text('Delete')
             }
         });
         console.log('Video Resource Id ==> ', lesson_resource_id)

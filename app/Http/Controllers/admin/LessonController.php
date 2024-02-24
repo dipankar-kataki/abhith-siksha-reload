@@ -561,34 +561,43 @@ class LessonController extends Controller
     }
 
 
-    public function deleteLessonResource(Request $request){
+    public function deleteLessonMediaResource(Request $request){
         $lesson_resource_id = $request->lesson_resource_id;
         
         try{
             DB::beginTransaction();
-            
+
             $get_lesson_data = Lesson::where('id', $lesson_resource_id)->first();
             $get_lesson_attachment_data = LessonAttachment::where('subject_lesson_id', $lesson_resource_id)->first();
             $file_location = null;
 
-            $get_lesson_attachment_data->delete();
-            $get_lesson_data->delete();
-
             if($get_lesson_attachment_data != null){
+                $get_lesson_attachment_data->delete();
+                $get_lesson_data->delete();
+
                 if($get_lesson_attachment_data->attachment_type == 1){
                     $file_location = $get_lesson_attachment_data->img_url;
+                    if (File::exists(public_path($file_location))) {
+                        // Delete the file
+                        File::delete(public_path($file_location));
+                    } else {
+                        // File does not exist
+                        return response()->json(['message' => 'Oops! Asset not found', 'data' => $file_location, 'status' => 404]);
+                    }
                 }else if($get_lesson_attachment_data->attachment_type == 2){
                     $file_location = $get_lesson_attachment_data->video_origin_url;
                     $video_thumbnail = $get_lesson_attachment_data->video_thumbnail_image;
+
+                    if (File::exists(public_path($file_location))) {
+                        // Delete the file
+                        File::delete(public_path($file_location));
+                        File::delete(public_path($video_thumbnail));
+                    } else {
+                        // File does not exist
+                        return response()->json(['message' => 'Oops! Asset not found', 'data' => $file_location, 'status' => 404]);
+                    }
                 }
-                if (File::exists(public_path($file_location))) {
-                    // Delete the file
-                    File::delete(public_path($file_location));
-                    File::delete(public_path($video_thumbnail));
-                } else {
-                    // File does not exist
-                    return response()->json(['message' => 'Oops! Asset not found', 'data' => $file_location, 'status' => 404]);
-                }
+                
             }else{
                 Lesson::where('id', $lesson_resource_id)->delete();
             }

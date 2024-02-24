@@ -51,7 +51,7 @@
                             </thead>
                             <tbody>
                                 @php $no=1; @endphp
-                                @foreach($lesson->topics->where('type',1) as $key=>$topic)
+                                @foreach($lesson->topics->where('type',1) as $key => $topic)
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td> {{$topic->parentLesson->name}}</td>
@@ -94,7 +94,7 @@
                                     {{-- <td><a href="" title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
                                         <a href="" title="View Details"><i class="mdi mdi-eye"></i></a>
                                     </td> --}}
-                                    <td><a href="#" title="Delete PDF" class="badge badge-danger"> Delete</a>
+                                    <td><a href="#" title="Delete PDF" class="badge badge-danger media-lesson-delete-btn" data-id="{{$topic->id}}"> Delete</a>
                                         {{-- <a href="" title="View Details"><i class="mdi mdi-eye"></i></a> --}}
                                     </td>
                                 </tr>
@@ -171,7 +171,7 @@
                                         <a href="{{route('admin.lesson.status',Crypt::encrypt($topic->id))}}"
                                             class="badge badge-danger">InActive</a> @endif
                                     </td>
-                                    <td><button type="button" title="Delete Video" class="badge badge-danger video-lesson-delete-btn" data-id={{$topic->id}}>
+                                    <td><button type="button" title="Delete Video" class="badge badge-danger media-lesson-delete-btn" data-id={{$topic->id}}>
                                          Delete</button>
                                         {{-- <a href="" title="View Details"><i class="mdi mdi-eye"></i></a> --}}
                                     </td>
