@@ -563,8 +563,10 @@ class LessonController extends Controller
 
     public function deleteLessonResource(Request $request){
         $lesson_resource_id = $request->lesson_resource_id;
-        DB::beginTransaction();
+        
         try{
+            DB::beginTransaction();
+            
             $get_lesson_data = Lesson::where('id', $lesson_resource_id)->first();
             $get_lesson_attachment_data = LessonAttachment::where('subject_lesson_id', $lesson_resource_id)->first();
             $file_location = null;
