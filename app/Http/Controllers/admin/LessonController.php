@@ -218,9 +218,6 @@ class LessonController extends Controller
         }
     }
 
-
-
-
     public function displayAttachment($lesson_id, $url_type)
     {
         try {
@@ -607,6 +604,17 @@ class LessonController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             return response()->json(['message' => 'Oops! Something went wrong'.$e->getMessage(), 'status' => 500]);
+        }
+    }
+
+    public function deleteLessonArticleResource(Request $request){
+        $article_resource_id = $request->article_resource_id;
+
+        try{
+            Lesson::where('id', $article_resource_id)->delete();
+            return response()->json(['message' => 'Article deleted successfully', 'status' => 200]);
+        }catch(\Exception $e){
+            return response()->json(['message' => 'Oops! Something went wrong.', 'status' => 500]);
         }
     }
 }

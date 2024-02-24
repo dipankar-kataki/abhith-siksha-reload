@@ -118,7 +118,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{lesson_id}', [LessonController::class, 'resourceEdit'])->name('admin.course.management.lesson.edit'); //edit video resources
             Route::post('update', [LessonController::class, 'resourceupdate'])->name('admin.course.management.lesson.update'); //update video resources
             Route::post('update-lesson', [LessonController::class, 'updateLesson'])->name('admin.course.management.lesson.update.name'); //update video resources
-            Route::post('delete-media-resource', [LessonController::class, 'deleteLessonMediaResource'])->name('admin.course.management.lesson.delete.media.resource'); //delete video resources
+            Route::post('delete-media-resource', [LessonController::class, 'deleteLessonMediaResource'])->name('admin.course.management.lesson.delete.media.resource'); //delete video and pdf resources
+            Route::post('delete-article-resource', [LessonController::class, 'deleteLessonArticleResource'])->name('admin.course.management.lesson.delete.article.resource'); //delete article resources
             /* ------------------------------- Multiple Choice Questions ------------------------------------ */
             Route::prefix('multiple-choice')->group(function () {
                 Route::get('multiple-choice-question', [MultipleChoiceController::class, 'index'])->name('admin.index.multiple.choice');

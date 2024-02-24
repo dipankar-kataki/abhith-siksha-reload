@@ -226,9 +226,10 @@
                                         <a href="{{route('admin.lesson.status',Crypt::encrypt($topic->id))}}"
                                             class="badge badge-danger">InActive</a> @endif
                                     </td>
-                                    <td><a href="{{route('admin.course.management.lesson.edit',Crypt::encrypt($topic->id))}}" title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
-                                        <a href="{{route('admin.course.management.lesson.view',Crypt::encrypt($topic->id))}}" title="View Details"><i class="mdi mdi-eye"></i></a>
-                                        <a href="#" title="Delete Article" class="badge badge-danger"> Delete</a>
+                                    <td>
+                                        <a href="{{route('admin.course.management.lesson.edit',Crypt::encrypt($topic->id))}}" style="margin-right:20px;" title="Edit Lesson"><i class="mdi mdi-grease-pencil"></i></a>
+                                        <a href="{{route('admin.course.management.lesson.view',Crypt::encrypt($topic->id))}}" style="margin-right:20px;" title="View Details"><i class="mdi mdi-eye"></i></a>
+                                        <a href="#" title="Delete Article" class="badge badge-danger article-delete-button" style="margin-right:20px;" data-id={{$topic->id}}> Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -264,7 +265,7 @@
                                     <td>
                                         <a href="{{route('admin.view.mcq.question',Crypt::encrypt($set->id))}}"
                                             title="View Details" class="my-4"><i class="mdi mdi-eye"></i></a>
-                                        <a href="#" title="Delete Prcatice Test" class="badge badge-danger">Delete</a>
+                                        <a href="#" title="Delete Prcatice Test" class="badge badge-danger mcq-delete-button" data-id="{{$set->id}}">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

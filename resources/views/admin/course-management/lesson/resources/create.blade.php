@@ -374,4 +374,51 @@ function setFileInfo() {
         console.log('Video Resource Id ==> ', lesson_resource_id)
     });
 </script>
+
+<script>
+    $('.article-delete-button').on('click', function(){
+        const article_resource_id = $(this).data('id');
+        console.log('Article Id ===>', article_resource_id);
+        $(this).attr('disabled', true)
+        $(this).text('Please wait..')
+        $.ajax({
+            url:"{{route('admin.course.management.lesson.delete.article.resource')}}",
+            type:"POST",
+            data:{
+               'article_resource_id' : article_resource_id,
+               '_token' : "{{csrf_token()}}" 
+            },
+            success:function(data){
+                if(data.status == 200){
+                    toastr.success(data.message, '', {
+                        positionClass: 'toast-top-right',
+                        timeOut: 3000
+                    });
+                    location.reload();
+                }else{
+                    toastr.error(data.data, data.message, {
+                        positionClass: 'toast-top-right',
+                        timeOut: 3000
+                    });
+                    $('.article-delete-button').attr('disabled', true)
+                    $('.article-delete-button').text('Delete')
+                }
+            },error:function(error){
+                toastr.error(error, 'Error', {
+                    positionClass: 'toast-top-right',
+                    timeOut: 3000
+                });
+                $('.article-delete-button').attr('disabled', true)
+                $('.article-delete-button').text('Delete')
+            }
+        });
+    });
+</script>
+
+<script>
+    $('.mcq-delete-button').on('click', function(){
+        const mcq_set_id = $(this).data('id');
+        console.log('Mcq set id ==>',mcq_set_id)
+    });
+</script>
 @endsection
