@@ -338,6 +338,8 @@ function setFileInfo() {
 <script>
     $('.video-lesson-delete-btn').on('click', function(){
         const lesson_resource_id = $(this).data('id');
+        $(this).attr('disabled', true)
+        $(this).text('Please wait..')
         $.ajax({
             url:"{{route('admin.course.management.lesson.delete.resource')}}",
             type:"POST",
@@ -353,16 +355,20 @@ function setFileInfo() {
                     });
                     location.reload();
                 }else{
-                    toastr.error(data.message, '', {
+                    toastr.error(data.data, data.message, {
                         positionClass: 'toast-top-right',
                         timeOut: 3000
                     });
+                    $('.video-lesson-delete-btn').attr('disabled', true)
+                    $('.video-lesson-delete-btn').text('Delete')
                 }
             },error:function(error){
                 toastr.error(error, 'Error', {
                     positionClass: 'toast-top-right',
                     timeOut: 3000
                 });
+                $('.video-lesson-delete-btn').attr('disabled', true)
+                $('.video-lesson-delete-btn').text('Delete')
             }
         });
         console.log('Video Resource Id ==> ', lesson_resource_id)

@@ -8,6 +8,7 @@ use App\Jobs\ConvertVideoForResolution;
 use App\Models\AssignSubject;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Board;
@@ -568,26 +569,26 @@ class LessonController extends Controller
             $get_lesson_attachment_data = LessonAttachment::where('subject_lesson_id', $lesson_resource_id)->first();
             $file_location = null;
 
+            $get_lesson_attachment_data->delete();
+            $get_lesson_data->delete();
+
             if($get_lesson_attachment_data != null){
                 if($get_lesson_attachment_data->attachment_type == 1){
                     $file_location = $get_lesson_attachment_data->img_url;
                 }else if($get_lesson_attachment_data->attachment_type == 2){
                     $file_location = $get_lesson_attachment_data->video_origin_url;
+                    $video_thumbnail = $get_lesson_attachment_data->video_thumbnail_image;
                 }
-                if (Storage::disk('public')->exists($file_location)) {
+                if (File::exists(public_path($file_location))) {
                     // Delete the file
-                    Storage::disk('public')->delete($file_location);
-
-                    $get_lesson_attachment_data->delete();
-                    $get_lesson_data->delete();
-
-                    return response()->json(['message' => 'Great! Asset deleted successfully', 'status' => 200]);
+                    File::delete(public_path($file_location));
+                    File::delete(public_path($video_thumbnail));
                 } else {
                     // File does not exist
-                    return response()->json(['message' => 'Oops! Asset not found', 'status' => 404]);
+                    return response()->json(['message' => 'Oops! Asset not found', 'data' => $file_location, 'status' => 404]);
                 }
             }else{
-                $get_lesson_data->delete();
+                Lesson::where('id', $lesson_resource_id)->delete();
             }
 
             DB::commit();
