@@ -25,7 +25,11 @@ class DashboardController extends Controller
 
     if($request->isMethod('get')){
       $media_link = HomepageMediaLink::where('type', 'YouTube')->first();
-      return view('admin.master.homepage-youtube-link.homepage-youtube-link')->with(['link' => $media_link->media_link]);
+      $link = null;
+      if($media_link != null){
+        $link = $media_link->media_link
+      }
+      return view('admin.master.homepage-youtube-link.homepage-youtube-link')->with(['link' => $link]);
     }else {
       try{
         $media_link = $request->media_link;
