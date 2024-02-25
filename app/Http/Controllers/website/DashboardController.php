@@ -26,7 +26,11 @@ class DashboardController extends Controller
         $testimonial = Testimonial::latest()->limit(3)->get();
 
         $media_link = HomepageMediaLink::where('type', 'YouTube')->first();
-        $link = $media_link->media_link;
+        $link = null;
+        if($media_link != null){
+            $link = $media_link->media_link;
+        }
+        
         // $gallery = Gallery::where('is_activate',Activation::Activate)->take(4)->orderBy('id','DESC')-get();
         $publishCourse = [];
         $upComingCourse = [];
